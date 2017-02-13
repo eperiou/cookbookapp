@@ -22,13 +22,22 @@ mongoose.connect('mongodb://eperiou:Tsukiyomi55@ds149329.mlab.com:49329/ezpz', (
 
 // make routes, post recipe, get recipes, search database
 app.get('/recipes', (req, res) => {
+
+
+    ///add new recipe
+    new Recipe({ }).save(req.body, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('user added to database');
+            res.redirect('/');
+        }
+    });
   //render user recipes
 });
 
 
 app.post('/signup', (req, res) => {
-    // console.log('signup');
-    // console.log(req.body);
     new User({username:req.body.username,password:req.body.password}).save(req.body, (err, result) => {
         if (err) {
             console.log(err);
@@ -47,10 +56,11 @@ app.post('/signin', (req, res) => {
         if (err) {
             console.log(err);
         } else {
+            ///Spot for future validations;
             console.log(password);
         }
     });
-    
+
 });
 
 //  server startup code;

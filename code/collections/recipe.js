@@ -2,10 +2,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var UserSchema = new Schema({
-    username:  String,
-    password: String
-});
+
 
 var RecipeSchema = new Schema({
     title:  String,
@@ -23,7 +20,6 @@ var RecipeSchema = new Schema({
 ///add methods
 
 
+var Recipe = mongoose.model('Recipe', RecipeSchema);
 
-
-module.exports = mongoose.model('User', UserSchema);
-module.exports = mongoose.model('Recipe', RecipeSchema);
+module.exports = Recipe;

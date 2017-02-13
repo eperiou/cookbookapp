@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const User = require('./collections/User.js');
+const path = require('path');
 
 let db;
 const app = express();
@@ -64,6 +65,6 @@ app.post('/signin', (req, res) => {
 });
 
 //  server startup code;
-app.get('/signin',function(req,res) { res.sendFile( __dirname + '../../users/signin.html');});
-app.get('/signup',function(req,res) { res.sendFile( __dirname + '../../users/signup.html');});
-app.get('/', function(req, res) { res.sendFile( __dirname + '../../users/signup.html'); });
+app.get('/signin',function(req,res) { res.sendFile(path.join(__dirname , '../users','/signin.html')); });
+app.get('/signup',function(req,res) { res.sendFile(path.join(__dirname , '../users','signup.html'));});
+app.get('/', function(req, res) { res.sendFile( path.join(__dirname , '../users','/signup.html')); });

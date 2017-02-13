@@ -19,10 +19,10 @@ MongoClient.connect('mongodb://eperiou:Tsukiyomi55@ds149329.mlab.com:49329/ezpz'
     }
 });
 
-// // make routes, post recipe, get recipes, search database
-// app.get('/recipes', (req, res) => {
-//   //render user recipes
-// });
+// make routes, post recipe, get recipes, search database
+app.get('/recipes', (req, res) => {
+  //render user recipes
+});
 
 
 app.post('/signup', (req, res) => {
@@ -39,7 +39,8 @@ app.post('/signup', (req, res) => {
 });
 app.post('/signin', (req, res) => {
     console.log('signin');
-    console.log(req.body);
+    var cursor = db.collection('users').find({username:req.body.username},{password:true});
+    console.log(cursor.body);
 });
 
 //  server startup code;

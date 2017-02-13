@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
+const User = require('./collections/User.js');
 
 let db;
 const app = express();
@@ -9,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
   //  mongo db for sandbox environment
 
-MongoClient.connect('mongodb://eperiou:Tsukiyomi55@ds149329.mlab.com:49329/ezpz', (err, database) => {
+mongoose.connect('mongodb://eperiou:Tsukiyomi55@ds149329.mlab.com:49329/ezpz', (err, database) => {
     console.log('Mongodb connected');
     app.listen(3000, function () { console.log('server connected'); });
     if (err) {
@@ -26,9 +27,9 @@ app.get('/recipes', (req, res) => {
 
 
 app.post('/signup', (req, res) => {
-    console.log('signup');
-    console.log(req.body);
-    db.collection('users').save(req.body, (err, result) => {
+    // console.log('signup');
+    // console.log(req.body);
+    new User({username:req.body.username,password:req.body.password}).save(req.body, (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -37,10 +38,19 @@ app.post('/signup', (req, res) => {
         }
     });
 });
+
+
+
 app.post('/signin', (req, res) => {
     console.log('signin');
-    var cursor = db.collection('users').find({username:req.body.username},{password:true});
-    console.log(cursor.body);
+    User.findOne({username:req.body.username},'password', (err, password)=>{
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(password);
+        }
+    });
+    
 });
 
 //  server startup code;

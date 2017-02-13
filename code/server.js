@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 
 let db;
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -20,14 +19,15 @@ MongoClient.connect('mongodb://eperiou:Tsukiyomi55@ds149329.mlab.com:49329/ezpz'
     }
 });
 
-// make routes, post recipe, get recipes, search database
-app.get('/recipes', (req, res) => {
-  //render user recipes
-});
+// // make routes, post recipe, get recipes, search database
+// app.get('/recipes', (req, res) => {
+//   //render user recipes
+// });
 
 
 app.post('/signup', (req, res) => {
     console.log('signup');
+    console.log(req.body);
     db.collection('users').save(req.body, (err, result) => {
         if (err) {
             console.log(err);
@@ -39,10 +39,10 @@ app.post('/signup', (req, res) => {
 });
 app.post('/signin', (req, res) => {
     console.log('signin');
-  // console.log(req.body);
+    console.log(req.body);
 });
 
-//  server startup stuff;
-app.get('/signin',function(req,res) { res.sendFile( __dirname + 'signin.html');});
-app.get('/signup',function(req,res) { res.sendFile( __dirname + '/signup.html');});
-app.get('/', function(req, res) { res.sendFile( __dirname + '/signin.html'); });
+//  server startup code;
+app.get('/signin',function(req,res) { res.sendFile( __dirname + '/users/signin.html');});
+app.get('/signup',function(req,res) { res.sendFile( __dirname + '/users/signup.html');});
+app.get('/', function(req, res) { res.sendFile( __dirname + '/users/signup.html'); });

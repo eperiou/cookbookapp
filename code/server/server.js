@@ -29,6 +29,7 @@ app.post('/recipes', (req, res) => {
     ///add new recipe
     console.log(req.body,'router /recipes');
     new Recipe({ title: req.body.title,
+        user: req.body.user,
         ingredients: req.body.ingredients,
         comments: req.body.comments}).save(req.body, (err, result) => {
             if (err) {

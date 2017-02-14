@@ -8,6 +8,7 @@ body {
     height: 1000px;
     width: 500px;
     background-color: purple;
+    color: aliceblue;
 }
 #main {
     position: relative;
@@ -37,7 +38,6 @@ form {
   margin-top :100px
   margin: 20px;
   display: block;
-  width : 30%
 
 }
 
@@ -62,4 +62,9 @@ input[type=url]:focus {
     border-style: double;
     width: 200px;
     margin-left: 50px
+}
+#ingredientlist {
+  background-color: plum;
+  margin: 40px 20px 0px 20px;
+  height: 20%;
 }

@@ -18,19 +18,24 @@
                     </div>
                   </div>
                 <h2>Find a new recipe</h2>
-                    <form ng-model="recipe" value="query" ng-submit="search()">
+                <form ng-model="recipe" value="query" ng-submit="search()">
                       <input type="text" ng-model="query.param" name="param" placeholder="search">
                       <button >Search food2fork</button>
                 </form>
-
+                <article id="ingredientlist">
+                    <h1>Ingredient list</h1>
+                    <div ng-model="ingredientlist" class="ingredientlist"  ng-repeat="ingredient in ingredientlist.ingredients" >
+                        <div class="ingredient">{{ingredient}}</div>
+                    </div>
+                </article>
             </sidebar>
             <main id="main">
                 <div ng-repeat="recipe in data.recipes">
-                    <article class="info">
+                    <article ng-click = "addingredient(recipe.ingredients)" class="info">
                       <div class="recipe">
                        <h4 class="title"><strong>{{recipe.title}}</strong></h4>
                           <div class="user">'{{recipe.user}}'</div>
-                          <div class="ingredients">{{recipe.ingredients}}</div>
+                          <div  class="ingredients">{{recipe.ingredients}}</div>
                           <div class="comments">{{recipe.comments}}</div>
                       </div>
                     </article>

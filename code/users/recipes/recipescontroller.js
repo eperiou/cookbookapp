@@ -10,7 +10,7 @@ angular.module('myApp.recipes', [])
     $scope.getRecipes =function () {
         Recipes.getAll()
         .then(function (recipes) {
-            console.log(recipes);
+            console.log(recipes,'recipes gotten');
             $scope.data.recipes = recipes;
         })
         .catch(function(err){
@@ -21,8 +21,10 @@ angular.module('myApp.recipes', [])
 
 //need a function to add one
     $scope.addOne = function () {
-        Recipes.addRecipe()
+        console.log($scope.recipe,'scope recipe');
+        Recipes.addRecipe($scope.recipe)
             .then(function(recipe) {
+
                 console.log(recipe);
             })
             .catch(function(err) {

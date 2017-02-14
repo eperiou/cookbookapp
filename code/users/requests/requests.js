@@ -11,7 +11,7 @@ angular.module('myApp.requests',[])
         });
     };
     var addRecipe = function(recipe) {
-        console.log('calling get one', recipe);
+        console.log('calling add one', recipe);
         return $http({
             method: 'POST',
             url: '/recipes',

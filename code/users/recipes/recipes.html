@@ -4,9 +4,9 @@
 <div class="recipes">
   <div class="recipe">
     <form ng-model="recipe" value="recipes" ng-submit="addOne()">
-      <input type="text" ng-model="recipe.title" placeholder="title">
-      <input type="text" ng-model="recipe.ingredients" placeholder="ingredients">
-      <input type="text" ng-model="recipe.comments" placeholder="comments">
+      <input type="text" ng-model="recipe.title" name="title" placeholder="title">
+      <input type="text" ng-model="recipe.ingredients" name="ingredients" placeholder="ingredients">
+      <input type="text" ng-model="recipe.comments"  name="comments" placeholder="comments">
       <button >Submit recipe</button>
     </form>
   </div>

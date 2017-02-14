@@ -30,24 +30,21 @@ app.post('/recipes', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log('user added to database');
-            res.redirect('/');
+            console.log('recipe added to database');
         }
     });
   //render user recipes
 });
+
 app.get('/recipes', (req, res) => {
-    ///add new recipe
     User.findOne({username:req.body.username},'password', (err, password)=>{
         if (err) {
             console.log(err);
         } else {
             //render user recipes
-            console.log('reciperetrieval');    
-
+            console.log('recipe retrieval');
         }
     });
-
 });
 
 
@@ -73,13 +70,13 @@ app.post('/signin', (req, res) => {
         } else {
                 ///overly simple authentications
             if(req.body.password === password.password ){
-                res.redirect('/recipes');
+                res.redirect('#/recipes');
             }
         }
     });
 });
 
 //  server startup code;
-app.get('/signin',function(req,res) { res.sendFile(path.join(__dirname , '../users/signin','/signin.html')); });
-app.get('/signup',function(req,res) { res.sendFile(path.join(__dirname , '../users/signup','signup.html'));});
-app.get('/', function(req, res) { res.sendFile( path.join(__dirname , '../users','/index.html')); });
+// app.get('/signin',function(req,res) { res.sendFile(path.join(__dirname , '../users/signin','/signin.html')); });
+// app.get('/signup',function(req,res) { res.sendFile(path.join(__dirname , '../users/signup','signup.html'));});
+// app.get('/', function(req, res) { res.sendFile( path.join(__dirname , '../users','/index.html')); });

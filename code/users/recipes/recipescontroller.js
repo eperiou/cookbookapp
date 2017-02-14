@@ -36,7 +36,7 @@ angular.module('myApp.recipes', [])
         console.log('search',$scope.query);
         Recipes.searchRecipe($scope.query)
             .then(function(recipe) {
-
+                
                 console.log(recipe);
             })
             .catch(function(err) {

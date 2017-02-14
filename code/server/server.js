@@ -5,7 +5,7 @@ const MongoClient = require('mongodb').MongoClient;
 const User = require('./collections/User.js');
 const Recipe = require('./collections/recipe.js');
 const path = require('path');
-
+const request = require('request');
 let db;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -38,7 +38,6 @@ app.post('/recipes', (req, res) => {
                 console.log('recipe added to database');
             }
         });
-  //render user recipes
 });
 
 app.get('/recipes', (req, res) => {
@@ -66,7 +65,7 @@ app.post('/signup', (req, res) => {
 
 
 app.post('/signin', (req, res) => {
-    console.log('signin');
+    console.log('signin',req.body);
     User.findOne({username:req.body.username},'password', (err, password)=>{
         if (err) {
             console.log(err);
@@ -78,6 +77,16 @@ app.post('/signin', (req, res) => {
         }
     });
 });
+
+app.get('http://food2fork.com/api/search', function (req,res){
+    console.log(req.body);
+
+ 
+});
+// app.options('https://www.googleapis.com/youtube/v3/search',function(req,res){console.log('option');})
+// app.get('https://www.googleapis.com/youtube/v3/search',function (req,res){
+//     console.log('request',req);
+// });
 
 //  server startup code;
 // app.get('/signin',function(req,res) { res.sendFile(path.join(__dirname , '../users/signin','/signin.html')); });

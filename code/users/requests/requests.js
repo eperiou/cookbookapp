@@ -29,13 +29,12 @@ angular.module('myApp.requests',[])
         return $http({
             method: 'GET',
             url: 'http://food2fork.com/api/search',
-            // headers: {'Access-Control-Allow-Origin': 'true'},
-            data: {key: 'c38fed7766c9317d7146b3b1b34ae875',
-                q: 'chicken',
-                // sort: 'sort=t'
+            params:{ key: 'c38fed7766c9317d7146b3b1b34ae875',
+                sort: 'sort=t',
+                q:query.param
             }
         }).then(function(resp) {
-            console.log(resp, 'post response');
+            console.log(resp, 'search response');
             return resp;
         }).catch(function (err) { console.log(err); });
     };

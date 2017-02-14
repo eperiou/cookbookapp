@@ -17,6 +17,12 @@
                       </form>
                     </div>
                   </div>
+                <h2>Find a new recipe</h2>
+                    <form ng-model="recipe" value="query" ng-submit="search()">
+                      <input type="text" ng-model="query.param" name="param" placeholder="search">
+                      <button >Search food2fork</button>
+                </form>
+
             </sidebar>
             <main id="main">
                 <div ng-repeat="recipe in data.recipes">

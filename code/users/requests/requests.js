@@ -22,9 +22,27 @@ angular.module('myApp.requests',[])
         }).catch(function (err) { console.log(err); });
     };
 
+    ///make API call to food 2fork for new recipes
+    var searchRecipe = function(query) {
+        console.log('calling search', query);
+        // console.log(window.API_KEY);
+        return $http({
+            method: 'GET',
+            url: 'http://food2fork.com/api/search',
+            // headers: {'Access-Control-Allow-Origin': 'true'},
+            data: {key: 'c38fed7766c9317d7146b3b1b34ae875',
+                q: 'chicken',
+                // sort: 'sort=t'
+            }
+        }).then(function(resp) {
+            console.log(resp, 'post response');
+            return resp;
+        }).catch(function (err) { console.log(err); });
+    };
     return {
         getAll: getAll,
-        addRecipe: addRecipe
+        addRecipe: addRecipe,
+        searchRecipe: searchRecipe
     };
 }).factory('Auth', function ($http, $location, $window) {
     var signin = function (user) {

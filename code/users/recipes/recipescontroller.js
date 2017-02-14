@@ -32,4 +32,16 @@ angular.module('myApp.recipes', [])
             });
     };
 
+    $scope.search = function () {
+        console.log('search',$scope.query);
+        Recipes.searchRecipe($scope.query)
+            .then(function(recipe) {
+
+                console.log(recipe);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+    };
+
 });

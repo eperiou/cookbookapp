@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<div id="container" ng-controller="RecipeController">
+  <h1>Add in your Own recipe</h1>
+  <form class="signupform" action="/recipe" method="post">
+    <input type="text" name="title" placeholder="title">
+    <input type="text" name="ingredients" placeholder="ingredients">
+    <input type="text" name="comments" placeholder="comments">
+      <button type="submit">Submit recipe</button>
+  </form>
+  <div ng-repeat="recipe in data.recipes">
+      <article class="info">
+        <div class="visits">
+         <span class="title">{{recipe.title}}</span>
+            <div class="user">{{recipe.user}}</div>
+            <div class="ingredients">{{recipe.ingredients}}</div>
+            <div class="comments">{{recipe.comments}}</div>
+        </div>
+      </article>
+  </div>
+</div>

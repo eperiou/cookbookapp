@@ -3,15 +3,15 @@ angular.module('myApp', ['ngRoute'])
     $routeProvider.
     when('/', {
         templateUrl: 'signin/signin.html',
-        controller: 'SigninController'
+        // controller: 'SigninController'
     })
     .when('/signup', {
         templateUrl: 'signup/signup.html',
-        controller: 'SignupController'
+        // controller: 'SignupController'
     })
     .when('/recipes',{
-        templateUrl: 'recipes.html',
-        controller: 'SignupController'
+        templateUrl: '/recipes.html',
+        // controller: 'SignupController'
     })
     .otherwise({
         redirectTo: '/'

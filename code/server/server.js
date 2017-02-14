@@ -8,6 +8,7 @@ const path = require('path');
 let db;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
   //  mongo db for sandbox environment
 
@@ -20,11 +21,10 @@ mongoose.connect('mongodb://eperiou:Tsukiyomi55@ds149329.mlab.com:49329/ezpz', (
         db = database;
     }
 });
+app.use(express.static(path.join(__dirname +'/../users')));
 
 // make routes, post recipe, get recipes, search database
 app.get('/recipes', (req, res) => {
-
-
     ///add new recipe
     new Recipe({ }).save(req.body, (err, result) => {
         if (err) {
@@ -61,10 +61,9 @@ app.post('/signin', (req, res) => {
             console.log(password);
         }
     });
-
 });
 
 //  server startup code;
 app.get('/signin',function(req,res) { res.sendFile(path.join(__dirname , '../users','/signin.html')); });
 app.get('/signup',function(req,res) { res.sendFile(path.join(__dirname , '../users','signup.html'));});
-app.get('/', function(req, res) { res.sendFile( path.join(__dirname , '../users','/signup.html')); });
+app.get('/', function(req, res) { res.sendFile( path.join(__dirname , '../users','/index.html')); });

@@ -1,0 +1,24 @@
+{
+  "name": "code",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Eric Periou <eperiou@yahoo.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/eperiou/course.mvp",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "users/lib/*"
+  ],
+  "dependencies": {
+    "angular-route": "^1.6.2",
+    "angular": "^1.6.2",
+    "angular-mocks": "^1.6.2"
+  }
+}

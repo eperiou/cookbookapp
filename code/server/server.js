@@ -24,7 +24,7 @@ mongoose.connect('mongodb://eperiou:Tsukiyomi55@ds149329.mlab.com:49329/ezpz', (
 app.use(express.static(path.join(__dirname +'/../users')));
 
 // make routes, post recipe, get recipes, search database
-app.get('/recipes', (req, res) => {
+app.post('/recipes', (req, res) => {
     ///add new recipe
     new Recipe({ }).save(req.body, (err, result) => {
         if (err) {
@@ -36,6 +36,20 @@ app.get('/recipes', (req, res) => {
     });
   //render user recipes
 });
+app.get('/recipes', (req, res) => {
+    ///add new recipe
+    User.findOne({username:req.body.username},'password', (err, password)=>{
+        if (err) {
+            console.log(err);
+        } else {
+            //render user recipes
+            console.log('reciperetrieval');    
+
+        }
+    });
+
+});
+
 
 
 app.post('/signup', (req, res) => {
@@ -57,13 +71,15 @@ app.post('/signin', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            ///Spot for future validations;
-            console.log(password);
+                ///overly simple authentications
+            if(req.body.password === password.password ){
+                res.redirect('/recipes');
+            }
         }
     });
 });
 
 //  server startup code;
-app.get('/signin',function(req,res) { res.sendFile(path.join(__dirname , '../users','/signin.html')); });
-app.get('/signup',function(req,res) { res.sendFile(path.join(__dirname , '../users','signup.html'));});
+app.get('/signin',function(req,res) { res.sendFile(path.join(__dirname , '../users/signin','/signin.html')); });
+app.get('/signup',function(req,res) { res.sendFile(path.join(__dirname , '../users/signup','signup.html'));});
 app.get('/', function(req, res) { res.sendFile( path.join(__dirname , '../users','/index.html')); });

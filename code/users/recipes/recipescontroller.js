@@ -23,7 +23,7 @@ angular.module('myApp.recipes', [])
     $scope.addOne = function () {
         Recipes.addRecipe()
             .then(function(recipe) {
-
+                console.log(recipe);
             })
             .catch(function(err) {
                 console.log(err);

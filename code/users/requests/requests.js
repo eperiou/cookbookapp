@@ -24,6 +24,48 @@ angular.module('myApp.requests',[])
 
     return {
         getAll: getAll,
-        addRecip: addRecipe
+        addRecipe: addRecipe
+    };
+}).factory('Auth', function ($http, $location, $window) {
+    var signin = function (user) {
+        console.log(user);
+        return $http({
+            method: 'POST',
+            url: '/signin',
+            data: user
+        })
+    .then(function (resp) {
+        console.log('signinresponse',resp.data);
+        return resp.data;
+    });
+    };
+
+    var signup = function (user) {
+        return $http({
+            method: 'POST',
+            url: '/signup',
+            data: user
+        })
+        .then(function (resp) {
+            console.log(resp,'usersignup response');
+            return resp.data;
+        });
+    };
+
+    // var isAuth = function () {
+    //     return !!$window.localStorage.getItem('com.shortly');
+    // };
+    //
+    // var signout = function () {
+    //     $window.localStorage.removeItem('com.shortly');
+    //     $location.path('/signin');
+    // };
+
+
+    return {
+        signin: signin,
+        signup: signup,
+        // isAuth: isAuth,
+        // signout: signout
     };
 });

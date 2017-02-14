@@ -1,4 +1,6 @@
-angular.module('myApp', ['ngRoute'])
+angular.module('myApp', [
+    'myApp.recipes'
+])
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider.
     when('/', {

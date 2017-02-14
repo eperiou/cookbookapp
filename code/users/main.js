@@ -1,7 +1,8 @@
-angular.module('myApp', [
-    'myApp.recipes'
+angular.module('myApp', ['ngRoute',
+    'myApp.recipes',
+    // 'myApp.requests'
 ])
-.config(['$routeProvider', function($routeProvider) {
+.config(['$routeProvider', function($routeProvider,$httpProvider) {
     $routeProvider.
     when('/', {
         templateUrl: 'signin/signin.html',
@@ -13,7 +14,7 @@ angular.module('myApp', [
     })
     .when('/recipes',{
         templateUrl: '/recipes.html',
-        // controller: 'SignupController'
+        controller: 'RecipesController'
     })
     .otherwise({
         redirectTo: '/'

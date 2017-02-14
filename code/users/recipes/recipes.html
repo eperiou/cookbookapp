@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<div id="container" ng-controller="RecipeController" ng-init="">
+<div id="container" ng-controller="RecipesController" ng-init="getRecipes()">
   <h1>Add in your Own recipe</h1>
-  <form class="recipeform" action="/recipe" method="post" ng-submit="addOne()">
-    <input type="text" name="title" placeholder="title">
-    <input type="text" name="ingredients" placeholder="ingredients">
-    <input type="text" name="comments" placeholder="comments">
-      <button type="submit">Submit recipe</button>
-  </form>
-  <div ng-repeat="recipe in data.recipes">
+<div class="recipes">
+  <div class="recipe">
+    <form ng-model="Recipes" value="recipes" ng-submit="addOne()">
+      <input type="text" name="title" placeholder="title">
+      <input type="text" name="ingredients" placeholder="ingredients">
+      <input type="text" name="comments" placeholder="comments">
+        <button >Submit recipe</button>
+    </form>
+  </div>
+
+</div>
+    <div ng-repeat="recipe in data.recipes">
       <article class="info">
         <div class="visits">
          <span class="title">{{recipe.title}}</span>

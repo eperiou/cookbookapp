@@ -1,14 +1,16 @@
 angular.module('myApp.recipes', [])
-.controller('RecipesController', function ($scope) {
+.controller('RecipesController', function ($scope,Recipes) {
+    console.log('myapp module');
     $scope.data = {};
-    //need a function to get all recipes
+
     $scope.data.recipes = [];
-    //need a function to add one
 
 
+//need a function to get all recipes
     $scope.getRecipes =function () {
         Recipes.getAll()
         .then(function (recipes) {
+            console.log(recipes);
             $scope.data.recipes = recipes;
         })
         .catch(function(err){
@@ -16,6 +18,8 @@ angular.module('myApp.recipes', [])
         });
     };
 
+
+//need a function to add one
     $scope.addOne = function () {
         Recipes.addRecipe()
             .then(function(recipe) {

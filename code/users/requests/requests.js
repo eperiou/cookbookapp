@@ -2,6 +2,7 @@ angular.module('myApp.requests')
 .factory('Recipes', function ($http) {
   // console.log($http);
     var getAll = function() {
+        console.log('caling getall');
         return $http({
             method: 'GET',
             url: '/recipes'
@@ -11,6 +12,7 @@ angular.module('myApp.requests')
         });
     };
     var addRecipe = function(recipe) {
+        console.log('calling get one', recipe);
         return $http({
             method: 'POST',
             url: '/recipes',

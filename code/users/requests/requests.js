@@ -6,9 +6,9 @@ angular.module('myApp.requests',[])
             method: 'GET',
             url: '/recipes'
         }).then(function(resp) {
-            console.log(resp);
+            console.log(resp,'response');
             return resp.data;
-        });
+        }).catch(err=>console.log('getallerror',err));
     };
     var addRecipe = function(recipe) {
         console.log('calling add one', recipe);

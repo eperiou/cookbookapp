@@ -21,7 +21,7 @@ angular.module('myApp.recipes', [])
 
 //need a function to add one
     $scope.addOne = function () {
-        console.log($scope.recipe,'scope recipe');
+        console.log($scope.user,'scope recipe');
         Recipes.addRecipe($scope.recipe)
             .then(function(recipe) {
 

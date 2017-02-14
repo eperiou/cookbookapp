@@ -2,6 +2,7 @@ angular.module('myApp.signup', [])
 .controller('SignupController', function ($scope, $location, Recipes, Auth) {
     console.log('signupcontroller');
     $scope.data = {};
+    $scope.user = {};
 
     $scope.data.recipes = [];
 
@@ -23,7 +24,7 @@ angular.module('myApp.signup', [])
     $scope.signin = function () {
         console.log('signincontroller callad');
         Auth.signin($scope.user)
-            .then(function(password) {
+            .then(function (password) {
                 $location.path('/recipes');
                 // console.log(password);
             })

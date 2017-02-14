@@ -1,26 +1,34 @@
 <!DOCTYPE html>
-<div id="container" ng-controller="RecipesController" ng-init="getRecipes()">
-  <h1>Add in your Own recipe</h1>
-<div class="recipes">
-  <div class="recipe">
-    <form ng-model="recipe" value="recipes" ng-submit="addOne()">
-      <input type="text" ng-model="recipe.title" name="title" placeholder="title">
-      <input type="text" ng-model="recipe.ingredients" name="ingredients" placeholder="ingredients">
-      <input type="text" ng-model="recipe.comments"  name="comments" placeholder="comments">
-      <button >Submit recipe</button>
-    </form>
-  </div>
-
-</div>
-    <div ng-repeat="recipe in data.recipes">
-                    <!-- {{recipe.comments}} -->
-      <article class="info">
-        <div class="visits">
-         <span class="title">{{recipe.title}}</span>
-            <div class="user">{{recipe.user}}</div>
-            <div class="ingredients">{{recipe.ingredients}}</div>
-            <div class="comments">{{recipe.comments}}</div>
+    <div id="container" ng-controller="RecipesController" ng-init="getRecipes()">
+      <h1>Add in your Own recipe</h1>
+        <div  class="contents">
+            <sidebar id="sidebar">
+                  <div class="recipes">
+                    <div class="recipeinput">
+                      <form ng-model="recipe" value="recipes" ng-submit="addOne()">
+                         Add your name
+                        <input type="text" ng-model="recipe.user" name="user" placeholder="Anonymous">
+                         Whats your dish's name?
+                        <input type="text" ng-model="recipe.title" name="title" placeholder="title">
+                         List ingredients
+                        <input type="text" ng-model="recipe.ingredients" name="ingredients" placeholder="ingredients">
+                        <input type="text" ng-model="recipe.comments"  name="comments" placeholder="comments">
+                        <button >Submit recipe</button>
+                      </form>
+                    </div>
+                  </div>
+            </sidebar>
+            <main id="main">
+                <div ng-repeat="recipe in data.recipes">
+                    <article class="info">
+                      <div class="recipe">
+                       <h4 class="title"><strong>{{recipe.title}}</strong></h4>
+                          <div class="user">'{{recipe.user}}'</div>
+                          <div class="ingredients">{{recipe.ingredients}}</div>
+                          <div class="comments">{{recipe.comments}}</div>
+                      </div>
+                    </article>
+                </div>
+            </main>
         </div>
-      </article>
-  </div>
-</div>
+    </div>

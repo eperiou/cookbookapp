@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const User = require('./collections/User.js');
+const Recipe = require('./collections/recipe.js');
 const path = require('path');
 
 let db;
@@ -26,24 +27,25 @@ app.use(express.static(path.join(__dirname +'/../users')));
 // make routes, post recipe, get recipes, search database
 app.post('/recipes', (req, res) => {
     ///add new recipe
-    new Recipe({ }).save(req.body, (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('recipe added to database');
-        }
-    });
+    console.log(req.body,'router /recipes');
+    new Recipe({ title: req.body.title,
+        ingredients: req.body.ingredients,
+        comments: req.body.comments}).save(req.body, (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('recipe added to database');
+            }
+        });
   //render user recipes
 });
 
 app.get('/recipes', (req, res) => {
-    User.findOne({username:req.body.username},'password', (err, password)=>{
-        if (err) {
-            console.log(err);
-        } else {
-            //render user recipes
-            console.log('recipe retrieval');
-        }
+    Recipe.find({},(err,recipes)=>{
+        if (err) {console.log(err); }
+        console.log(recipes,'recipe');
+        res.json(recipes);
+        console.log('recipe retrieval');
     });
 });
 
@@ -70,7 +72,7 @@ app.post('/signin', (req, res) => {
         } else {
                 ///overly simple authentications
             if(req.body.password === password.password ){
-                res.redirect('#/recipes');
+                res.end(req.body.password);
             }
         }
     });

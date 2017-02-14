@@ -23,9 +23,9 @@ angular.module('myApp.signup', [])
     $scope.signin = function () {
         console.log('signincontroller callad');
         Auth.signin($scope.user)
-            .then(function(user) {
-                $location.path('/recipe');
-                console.log(user);
+            .then(function(password) {
+                $location.path('/recipes');
+                // console.log(password);
             })
             .catch(function(err) {
                 $location.path('/signin');

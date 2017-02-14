@@ -1,6 +1,5 @@
-angular.module('myApp.requests')
+angular.module('myApp.requests',[])
 .factory('Recipes', function ($http) {
-  // console.log($http);
     var getAll = function() {
         console.log('caling getall');
         return $http({

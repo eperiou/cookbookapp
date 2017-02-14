@@ -1,6 +1,7 @@
 angular.module('myApp', ['ngRoute',
     'myApp.recipes',
-    // 'myApp.requests'
+    'myApp.requests'
+
 ])
 .config(['$routeProvider', function($routeProvider,$httpProvider) {
     $routeProvider.
@@ -10,10 +11,10 @@ angular.module('myApp', ['ngRoute',
     })
     .when('/signup', {
         templateUrl: 'signup/signup.html',
-        // controller: 'SignupController'
+        controller: 'SignupController'
     })
     .when('/recipes',{
-        templateUrl: '/recipes.html',
+        templateUrl: 'recipes/recipes.html',
         controller: 'RecipesController'
     })
     .otherwise({

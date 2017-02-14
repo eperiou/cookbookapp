@@ -1,3 +1,4 @@
+// 'use strict'
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -77,6 +78,7 @@ app.post('/signin', (req, res) => {
         }
     });
 });
+
 
 
 // app.options('https://www.googleapis.com/youtube/v3/search',function(req,res){console.log('option');})

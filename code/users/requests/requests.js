@@ -26,9 +26,6 @@ angular.module('myApp.requests',[])
 
     ///make API call to food 2fork for new recipes
     var searchRecipe = function(query) {
-        console.log('calling search', query);
-
-
         return $http({
             method: 'GET',
             url: 'http://food2fork.com/api/search',

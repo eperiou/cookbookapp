@@ -13,9 +13,9 @@ module.exports = {
         },
         "sourceType": "module"
     },
-    // "plugins": [
-    //     "react"
-    // ],
+    "plugins": [
+        "react"
+    ],
     "rules": {
         "indent": [
             "error",

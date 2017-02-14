@@ -1,3 +1,5 @@
+// var keys = require('keys');
+// console.log(keys,'key');
 angular.module('myApp.requests',[])
 .factory('Recipes', function ($http) {
     var getAll = function() {
@@ -25,11 +27,12 @@ angular.module('myApp.requests',[])
     ///make API call to food 2fork for new recipes
     var searchRecipe = function(query) {
         console.log('calling search', query);
-        // console.log(window.API_KEY);
+
+
         return $http({
             method: 'GET',
             url: 'http://food2fork.com/api/search',
-            params:{ key: 'c38fed7766c9317d7146b3b1b34ae875',
+            params:{ key: window.API_KEY,
                 sort: 'sort=t',
                 q:query.param
             }

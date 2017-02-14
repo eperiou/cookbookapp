@@ -27,12 +27,13 @@ angular.module('myApp.recipes', [])
         console.log($scope.user,'scope recipe');
         Recipes.addRecipe($scope.recipe)
             .then(function(recipe) {
-
+                $scope.getRecipes();
                 console.log(recipe);
             })
             .catch(function(err) {
                 console.log(err);
             });
+
     };
 
     $scope.search = function () {

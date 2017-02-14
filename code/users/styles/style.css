@@ -12,7 +12,6 @@ body {
 }
 #main {
     position: relative;
-    margin-left: 250px;
 }
 a {
   color: #333;
@@ -57,11 +56,11 @@ input[type=url]:focus {
   outline: none;
 }
 .info {
-    display: table-cell;
-    padding-left: 20px;
-    border-style: double;
-    width: 200px;
-    margin-left: 50px
+  display: inline-table;
+  padding-left: 20px;
+  border-style: double;
+  width: 400px;
+
 }
 #ingredientlist {
   background-color: plum;

@@ -78,11 +78,7 @@ app.post('/signin', (req, res) => {
     });
 });
 
-app.get('http://food2fork.com/api/search', function (req,res){
-    console.log(req.body);
 
- 
-});
 // app.options('https://www.googleapis.com/youtube/v3/search',function(req,res){console.log('option');})
 // app.get('https://www.googleapis.com/youtube/v3/search',function (req,res){
 //     console.log('request',req);

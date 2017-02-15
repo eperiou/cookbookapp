@@ -1,5 +1,6 @@
 // 'use strict'
-
+require('dotenv').config();
+const PORT = process.env.PORT;
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -16,9 +17,9 @@ app.use(bodyParser.json());
 
   //  mongo db for sandbox environment
 
-mongoose.connect('mongodb://eperiou:Tsukiyomi55@ds149329.mlab.com:49329/ezpz', (err, database) => {
+mongoose.connect(process.env.MONGOURI, (err, database) => {
     console.log('Mongodb connected');
-    app.listen(3000, function () { console.log('server connected'); });
+    app.listen(process.env.PORT, function () { console.log('server connected on ' + PORT); });
     if (err) {
         console.log(err);
     } else {

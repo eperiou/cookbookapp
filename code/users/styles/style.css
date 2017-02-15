@@ -11,7 +11,9 @@ body {
     color: aliceblue;
 }
 #main {
-    position: relative;
+  position: relative;
+  overflow-y: scroll;
+  height: 1000px;
 }
 a {
   color: #333;
@@ -69,6 +71,7 @@ img {
   background-color: plum;
   margin: 40px 20px 0px 20px;
   height: 20%;
+  overflow-y: scroll;
 }
 div.result {
   display: flex;

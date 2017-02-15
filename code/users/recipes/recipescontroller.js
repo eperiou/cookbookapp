@@ -47,17 +47,18 @@ angular.module('myApp.recipes', [])
         Recipes.findQueryById(recipeid)
             .then(function(result) {
                 console.log(result,'getingredients request');
+
         //add ingredients to the grocery list
                 $scope.ingredientlist.ingredients =
                     $scope.ingredientlist.ingredients.concat(result.data.recipe.ingredients);
-                return results;
-        //add recipe to the stored recipes database.
 
-            }).then(function(results){
+
+
+        //add recipe to the stored recipes database.
                 var recipeObj = {
-                    title: results.data.recipe.title,
-                    ingredients:results.data.recipe.ingredients,
-                    user: results.data.recipe.publisher,
+                    title: result.data.recipe.title,
+                    ingredients:result.data.recipe.ingredients,
+                    user: result.data.recipe.publisher,
                 };
                 Recipes.addRecipe(recipeObj);
             })

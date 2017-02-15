@@ -9,12 +9,7 @@ var RecipeSchema = new Schema({
     user: String,
     ingredients:   String,
     comments: String,
-    // date: { type: Date, default: Date.now },
-    // hidden: Boolean,
-    // meta: {
-    //     votes: Number,
-    //     favs:  Number
-    // }
+
 });
 
 ///add methods

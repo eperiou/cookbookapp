@@ -26,6 +26,10 @@ mongoose.connect(process.env.MONGOURI, (err, database) => {
         db = database;
     }
 });
+
+//route to retrieve all stored recipes
+/**setup express server and routes
+ */
 app.use(express.static(path.join(__dirname +'/../users')));
 
 // make routes, post recipe, get recipes, search database
@@ -44,6 +48,14 @@ app.post('/recipes', (req, res) => {
         });
 });
 
+//route to retrieve all stored recipes
+/**
+ * Returns the recipes from database
+ * @param req, request body
+ * @param res, response body
+ * @param will return object of recpie array
+ */
+
 app.get('/recipes', (req, res) => {
     Recipe.find({},(err,recipes)=>{
         if (err) {console.log(err); }
@@ -53,7 +65,13 @@ app.get('/recipes', (req, res) => {
     });
 });
 
-
+//route to sign up new user
+/**
+ * Returns no value, redirects to base page
+ * @param req, request body
+ * @param res, response body
+ * @param will return object of recpie array
+ */
 
 app.post('/signup', (req, res) => {
     new User({username:req.body.username,password:req.body.password}).save(req.body, (err, result) => {
@@ -65,7 +83,13 @@ app.post('/signup', (req, res) => {
         }
     });
 });
-
+/**
+ * Returns request body password from database
+ * @param req, request body
+ * @param res, response body
+ * @param compares request password to password for input username
+ *        and checks if valid, for later encryption
+ */
 
 
 app.post('/signin', (req, res) => {

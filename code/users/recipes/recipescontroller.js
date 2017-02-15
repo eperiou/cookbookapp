@@ -9,6 +9,13 @@ angular.module('myApp.recipes', [])
     $scope.search.results = [];
 
 //need a function to get all recipes
+//route to retrieve all stored recipes
+/**
+ * Returns the recipes from database
+ * @param  return value, then, promise statemnt of all recipes
+ * @param eror handling function
+ * @param sets global array of recipes for display
+ */
     $scope.getRecipes =function () {
         Recipes.getAll()
         .then(function (recipes) {
@@ -20,15 +27,39 @@ angular.module('myApp.recipes', [])
         });
     };
 
+  /**
+   * Adds ingredient list to grocery list
+   * @param  no return
+   * @param
+   * @param sets global array of recipes for display
+   */
+
     $scope.addingredient = function (ingredient) {
-        console.log('click',ingredient);
+
         $scope.ingredientlist.ingredients.push(ingredient);
     };
 //need a function to add one
+/**
+ *
+ *  no return
+ * Adds one recipe to the database
+ * @param
+ */
+
+
     $scope.addOne = function () {
         console.log($scope.user,'scope recipe');
         Recipes.addRecipe($scope.recipe);
     };
+
+
+
+    /**
+     * Adds ingredient list to grocery list
+     * @param  Search f2f for list of foods
+     * @param  poulates page with recipes from online
+     * @param
+     */
 
     $scope.search = function () {
         // console.log('search',$scope.query);
@@ -36,12 +67,22 @@ angular.module('myApp.recipes', [])
         Recipes.searchRecipe($scope.query)
             .then(function(results) {
                 $scope.search.results = results.data.recipes;
-                console.log($scope.search.results, 'search in controller');
             })
             .catch(function(err) {
                 console.log(err);
             });
     };
+
+
+
+
+        /**
+         * Searches database for food by id number
+         * @param  Search f2f by food item
+         * @param  adds ingredients to grocery list
+         * @param  adds recipe to database
+         */
+
     $scope.getingredients = function (recipeid) {
         // console.log(recipeid,'recipeid');
         Recipes.findQueryById(recipeid)

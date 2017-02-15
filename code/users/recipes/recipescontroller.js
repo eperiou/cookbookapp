@@ -31,10 +31,12 @@ angular.module('myApp.recipes', [])
     };
 
     $scope.search = function () {
-        console.log('search',$scope.query);
+        // console.log('search',$scope.query);
+        $scope.data.recipes = [];
         Recipes.searchRecipe($scope.query)
-            .then(function(recipe) {
-                console.log(recipe, 'search in controller');
+            .then(function(results) {
+                $scope.search.results = results.data.recipes;
+                console.log($scope.search.results, 'search in controller');
             })
             .catch(function(err) {
                 console.log(err);

@@ -62,8 +62,15 @@ input[type=url]:focus {
   width: 400px;
 
 }
+img {
+  max-height: 100px
+}
 #ingredientlist {
   background-color: plum;
   margin: 40px 20px 0px 20px;
   height: 20%;
+}
+div.result {
+  display: flex;
+  align-items: center;
 }

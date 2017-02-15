@@ -34,22 +34,33 @@
                     <article ng-click = "addingredient(recipe.ingredients)" class="info">
                       <div class="recipe">
                        <h4 class="title"><strong>{{recipe.title}}</strong></h4>
-                          <div class="user">'{{recipe.user}}'</div>
-                          <div  class="ingredients">{{recipe.ingredients}}</div>
-                          <div class="comments">{{recipe.comments}}</div>
+                          <div class="user">'Submitted by: {{recipe.user}}'</div>
+                          <div  class="ingredients">Ingredients: {{recipe.ingredients}}</div>
+                          <div class="comments">Comments: {{recipe.comments}}</div>
                       </div>
                     </article>
                 </div>
-                <div ng-repeat="recipe in data.Query">
-                    <article ng-click = "addingredient(recipe.ingredients)" class="info">
-                      <div class="recipe">
-                       <h4 class="title"><strong>{{recipe.title}}</strong></h4>
-                          <div class="user">'{{recipe.user}}'</div>
-                          <div  class="ingredients">{{recipe.ingredients}}</div>
-                          <div class="comments">{{recipe.comments}}</div>
+                <div ng-model="query" class="search" ng-repeat="result in search.results">
+                    <article class="info">
+                      <div class="result">
+                        <span>
+                        <img ng-click="getingredients({{results.recipe_id}})" ng-src="{{result.image_url}}">
+                        <div class="user">'Published by :{{result.publisher}}'</div>
+                        <a  class="link" ng-href="{{result.f2f_url}}">{{result.f2f_url}}</a>
+                        </span>
+                        <h4 class="title"><strong>{{result.title}}</strong></h4>
                       </div>
                     </article>
                 </div>
             </main>
         </div>
     </div>
+
+f2f_url "http://food2fork.com/view/35120"
+image_url"http://static.food2fork.com/Bacon2BWrapped2BJalapeno2BPopper2BStuffed2BChicken2B5002B5909939b0e65.jpg"
+publisher "Closet Cooking"
+publisher_url"http://closetcooking.com"
+source_url "http://www.closetcooking.com/2012/11/bacon-wrapped-jalapeno-popper-stuffed.html"
+title
+:
+"Bacon Wr

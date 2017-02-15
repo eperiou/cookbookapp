@@ -49,6 +49,7 @@ angular.module('myApp.recipes', [])
 
     $scope.addOne = function () {
         console.log($scope.user,'scope recipe');
+        $scope.data.recipes.unshift($scope.recipe);
         Recipes.addRecipe($scope.recipe);
     };
 

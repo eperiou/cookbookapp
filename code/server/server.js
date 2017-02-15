@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGOURI, (err, database) => {
     console.log('Mongodb connected');
-    app.listen(process.env.PORT, function () { console.log('server connected on ' + PORT); });
+    app.listen(process.env.PORT, function () { console.log('server connected on ' +  PORT); });
     if (err) {
         console.log(err);
     } else {

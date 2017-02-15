@@ -14,7 +14,8 @@ angular.module('myApp.requests',[])
         return $http({
             method: 'GET',
             url: 'http://food2fork.com/api/search' ,
-            params:{key: 'c38fed7766c9317d7146b3b1b34ae875',
+            header:['Access-Control-Allow-Origin',true],
+            params:{key: 'string',
                 q:query.param,
                 sort: 'sort=t'
             }
@@ -39,7 +40,7 @@ angular.module('myApp.requests',[])
         return $http({
             method: 'GET',
             url: 'http://food2fork.com/api/get'  ,
-            params:{key: 'c38fed7766c9317d7146b3b1b34ae875',
+            params:{key: 'string',
                 rId:recipeid,
             }
         }).then(function(resp) {
@@ -81,20 +82,10 @@ angular.module('myApp.requests',[])
         });
     };
 
-    // var isAuth = function () {
-    //     return !!$window.localStorage.getItem('com.shortly');
-    // };
-    //
-    // var signout = function () {
-    //     $window.localStorage.removeItem('com.shortly');
-    //     $location.path('/signin');
-    // };
 
 
     return {
         signin: signin,
         signup: signup,
-        // isAuth: isAuth,
-        // signout: signout
     };
 });

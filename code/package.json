@@ -16,10 +16,12 @@
     "angular-mocks": "^1.6.2",
     "angular-route": "^1.6.2",
     "body-parser": "^1.16.1",
+    "dotenv": "^4.0.0",
     "eslint": "^3.15.0",
     "express": "^4.14.1",
     "mongodb": "^2.2.23",
     "mongoose": "^4.8.2",
+    "node-env-file": "^0.1.8",
     "request": "^2.79.0"
   },
   "devDependencies": {

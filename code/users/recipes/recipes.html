@@ -24,13 +24,23 @@
                 </form>
                 <article id="ingredientlist">
                     <h1>Ingredient list</h1>
-                    <div ng-model="ingredientlist" class="ingredientlist"  ng-repeat="ingredient in ingredientlist.ingredients" >
-                        <div class="ingredient">{{ingredient}}</div>
+                    <div ng-model="ingredientlist" class="ingredientlist"  ng-repeat="ingredient in ingredientlist.ingredients track by $index" >
+                        <div class="ingredient" ng-click="ingredientlist.ingredients.splice($index,1)">{{ingredient}}</div>
                     </div>
                 </article>
             </sidebar>
             <main id="main">
                 <div ng-repeat="recipe in data.recipes">
+                    <article ng-click = "addingredient(recipe.ingredients)" class="info">
+                      <div class="recipe">
+                       <h4 class="title"><strong>{{recipe.title}}</strong></h4>
+                          <div class="user">'{{recipe.user}}'</div>
+                          <div  class="ingredients">{{recipe.ingredients}}</div>
+                          <div class="comments">{{recipe.comments}}</div>
+                      </div>
+                    </article>
+                </div>
+                <div ng-repeat="recipe in data.Query">
                     <article ng-click = "addingredient(recipe.ingredients)" class="info">
                       <div class="recipe">
                        <h4 class="title"><strong>{{recipe.title}}</strong></h4>

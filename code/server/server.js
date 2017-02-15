@@ -1,4 +1,5 @@
 // 'use strict'
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -7,6 +8,7 @@ const User = require('./collections/User.js');
 const Recipe = require('./collections/recipe.js');
 const path = require('path');
 const request = require('request');
+const http = require('http');
 let db;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -78,15 +80,3 @@ app.post('/signin', (req, res) => {
         }
     });
 });
-
-
-
-// app.options('https://www.googleapis.com/youtube/v3/search',function(req,res){console.log('option');})
-// app.get('https://www.googleapis.com/youtube/v3/search',function (req,res){
-//     console.log('request',req);
-// });
-
-//  server startup code;
-// app.get('/signin',function(req,res) { res.sendFile(path.join(__dirname , '../users/signin','/signin.html')); });
-// app.get('/signup',function(req,res) { res.sendFile(path.join(__dirname , '../users/signup','signup.html'));});
-// app.get('/', function(req, res) { res.sendFile( path.join(__dirname , '../users','/index.html')); });

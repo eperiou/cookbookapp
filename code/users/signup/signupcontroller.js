@@ -1,10 +1,12 @@
 angular.module('myApp.signup', [])
 .controller('SignupController', function ($scope, $location, Recipes, Auth) {
+
     console.log('signupcontroller');
     $scope.data = {};
     $scope.user = {};
 
     $scope.data.recipes = [];
+
 
 //need a function to get all recipes
     $scope.signUp =function () {

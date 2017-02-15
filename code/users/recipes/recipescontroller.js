@@ -42,5 +42,28 @@ angular.module('myApp.recipes', [])
                 console.log(err);
             });
     };
+    $scope.getingredients = function (recipeid) {
+        // console.log(recipeid,'recipeid');
+        Recipes.findQueryById(recipeid)
+            .then(function(result) {
+                console.log(result,'getingredients request');
+        //add ingredients to the grocery list
+                $scope.ingredientlist.ingredients =
+                    $scope.ingredientlist.ingredients.concat(result.data.recipe.ingredients);
+                return results;
+        //add recipe to the stored recipes database.
+
+            }).then(function(results){
+                var recipeObj = {
+                    title: results.data.recipe.title,
+                    ingredients:results.data.recipe.ingredients,
+                    user: results.data.recipe.publisher,
+                };
+                Recipes.addRecipe(recipeObj);
+            })
+            .catch(function(err){
+                console.log(err,'error retrieving by ID');
+            });
+    };
 
 });

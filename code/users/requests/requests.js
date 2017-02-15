@@ -35,13 +35,25 @@ angular.module('myApp.requests',[])
             return resp;
         }).catch(function (err) { console.log(err); });
     };
-
+    var findQueryById = function (recipeid) {
+        return $http({
+            method: 'GET',
+            url: 'http://food2fork.com/api/get'  ,
+            params:{key: 'c38fed7766c9317d7146b3b1b34ae875',
+                rId:recipeid,
+            }
+        }).then(function(resp) {
+            console.log(resp, 'query by id response');
+            return resp;
+        }).catch(function (err) { console.log(err); });
+    };
     ///make API call to food 2fork for new recipes
 
     return {
         getAll: getAll,
         addRecipe: addRecipe,
-        searchRecipe: searchRecipe
+        searchRecipe: searchRecipe,
+        findQueryById: findQueryById
     };
 }).factory('Auth', function ($http, $location, $window) {
     var signin = function (user) {

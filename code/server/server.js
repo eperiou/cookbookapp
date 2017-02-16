@@ -10,6 +10,7 @@ const Recipe = require('./collections/recipe.js');
 const path = require('path');
 const request = require('request');
 const http = require('http');
+var Promise = require('bluebird');
 let db;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -102,6 +103,24 @@ app.post('/signin', (req, res) => {
             if(req.body.password === password.password ){
                 res.end(req.body.password);
             }
+        }
+    });
+});
+
+app.get('/search', function(req,res){
+    // // http://food2fork.com/api/search
+    //
+    // req.query.key = process.env.Key;
+    // req.query.uri = 'http://food2fork.com/api/search';
+    // var obj = {
+    //
+    // };
+    // console.log(req.query,'server search');
+    request.get(`http://food2fork.com/api/search?key=${process.end.Key}&q=${req.query.q}&sort=sort=t` , function(err,res,body){
+        if(err){
+            console.log(err);
+        }else{
+            console.log(res);
         }
     });
 });

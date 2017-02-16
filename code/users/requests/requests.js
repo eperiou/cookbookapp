@@ -13,7 +13,7 @@ angular.module('myApp.requests',[])
     var searchRecipe = function(query) {
         return $http({
             method: 'GET',
-            url: 'http://food2fork.com/api/search' ,
+            url: '/search' ,
             header:['Access-Control-Allow-Origin',true],
             params:{key: 'string',
                 q:query.param,
@@ -39,7 +39,7 @@ angular.module('myApp.requests',[])
     var findQueryById = function (recipeid) {
         return $http({
             method: 'GET',
-            url: 'http://food2fork.com/api/get'  ,
+            url: '/search'  ,
             params:{key: 'string',
                 rId:recipeid,
             }

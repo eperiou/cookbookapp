@@ -1,5 +1,5 @@
 // 'use strict'
-require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -14,13 +14,13 @@ const Q = require('q');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+require('dotenv').config();
 let findRecipe = Q.nbind(Recipe.find, Recipe);
 
   //  mongo db for sandbox environment
 
-mongoose.connect('mongodb://eperiou:Tsukiyomi55@ds149329.mlab.com:49329/ezpz', (err, database) => {
-    app.listen(3000, function () { console.log('server connected on ' +  3000); });
+mongoose.connect(process.env.MONGOURI, (err, database) => {
+    app.listen(process.env.PORT, function () { console.log('server connected on ' +  process.env.PORT); });
     if (err) {
         console.log(err);
     } else {
@@ -95,7 +95,7 @@ app.post('/signin', (req, res) => {
 app.get('/search', (req,res, next) =>{
     if(req.query.rId) { next();}
     rp({
-        url: 'http://food2fork.com/api/search?key=c38fed7766c9317d7146b3b1b34ae875',
+        url: `http://food2fork.com/api/search?key=${process.env.KEY}`,
         method:'GET',
         params:req.query
     })
@@ -110,7 +110,7 @@ app.get('/search', (req,res, next) =>{
         },
         qs:{
             rId: req.query.rId,
-            key:'c38fed7766c9317d7146b3b1b34ae875',
+            key: process.env.KEY,
         }
     })
     .then(search=>{res.send(search);})

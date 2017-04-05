@@ -68,8 +68,6 @@ app.get('/recipes', (req, res) => {
  */
 
 app.post('/signup', (req, res) => {
-
-    console.log('signup')
     new User({username:req.body.username, password:req.body.password}).save(req.body, (err, result) => {
         if (err) { console.error(err); }
     });

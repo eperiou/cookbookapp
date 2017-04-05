@@ -1,38 +1,28 @@
 angular.module('myApp.signup', [])
 .controller('SignupController', function ($scope, $location, Recipes, Auth) {
 
-    console.log('signupcontroller');
     $scope.data = {};
     $scope.user = {};
 
     $scope.data.recipes = [];
 
-
-//need a function to get all recipes
-    $scope.signUp =function () {
+    $scope.signUp = () => {
         Auth.signup($scope.user)
-        .then(function (user) {
-            console.log(user);
+        .then((user) => {
             $location.path('/signin');
-            // $scope.data.recipes = recipes;
         })
-        .catch(function(err){
-            console.log(err);
+        .catch((err) => {
+            console.error(err);
         });
     };
 
-
-//need a function to add one
-    $scope.signin = function () {
-        console.log('signincontroller callad');
+    $scope.signin =  () => {
         Auth.signin($scope.user)
-            .then(function (password) {
+            .then((password) => {
                 $location.path('/recipes');
-                // console.log(password);
             })
-            .catch(function(err) {
+            .catch((err) => {
                 $location.path('/signin');
-                console.log(err);
             });
     };
 

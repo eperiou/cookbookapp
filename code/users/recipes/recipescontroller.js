@@ -1,6 +1,5 @@
 angular.module('myApp.recipes', [])
 .controller('RecipesController', function ($scope,Recipes) {
-    console.log('myapp module');
     $scope.data = {};
     $scope.data.recipes = [];
     $scope.ingredientlist ={};
@@ -16,15 +15,12 @@ angular.module('myApp.recipes', [])
  * @param eror handling function
  * @param sets global array of recipes for display
  */
-    $scope.getRecipes =function () {
+    $scope.getRecipes = () => {
         Recipes.getAll()
-        .then(function (recipes) {
-            // console.log(recipes,'recipes gotten');
+        .then((recipes) => {
             $scope.data.recipes = recipes;
         })
-        .catch(function(err){
-            console.log(err);
-        });
+        .catch((err) => { console.error(err); });
     };
 
   /**
@@ -34,26 +30,19 @@ angular.module('myApp.recipes', [])
    * @param sets global array of recipes for display
    */
 
-    $scope.addingredient = function (ingredient) {
-
+    $scope.addingredient =  (ingredient) => {
         $scope.ingredientlist.ingredients.push(ingredient);
     };
-//need a function to add one
 /**
  *
  *  no return
  * Adds one recipe to the database
  * @param
  */
-
-
-    $scope.addOne = function () {
-        console.log($scope.user,'scope recipe');
+    $scope.addOne =  () => {
         $scope.data.recipes.unshift($scope.recipe);
         Recipes.addRecipe($scope.recipe);
     };
-
-
 
     /**
      * Adds ingredient list to grocery list
@@ -62,20 +51,14 @@ angular.module('myApp.recipes', [])
      * @param
      */
 
-    $scope.search = function () {
-        // console.log('search',$scope.query);
+    $scope.search =  () => {
         $scope.data.recipes = [];
         Recipes.searchRecipe($scope.query)
-            .then(function(results) {
+            .then((results) => {
                 $scope.search.results = results.data.recipes;
             })
-            .catch(function(err) {
-                console.log(err);
-            });
+            .catch((err) => { console.error(err); });
     };
-
-
-
 
         /**
          * Searches database for food by id number
@@ -84,29 +67,21 @@ angular.module('myApp.recipes', [])
          * @param  adds recipe to database
          */
 
-    $scope.getingredients = function (recipeid) {
-        // console.log(recipeid,'recipeid');
+    $scope.getingredients =  (recipeid) => {
         Recipes.findQueryById(recipeid)
-            .then(function(result) {
-                console.log(result,'getingredients request');
-
+            .then((result) => {
         //add ingredients to the grocery list
                 $scope.ingredientlist.ingredients =
                     $scope.ingredientlist.ingredients.concat(result.data.recipe.ingredients);
-
-
-
         //add recipe to the stored recipes database.
-                var recipeObj = {
+                const recipeObj = {
                     title: result.data.recipe.title,
                     ingredients:result.data.recipe.ingredients,
                     user: result.data.recipe.publisher,
                 };
                 Recipes.addRecipe(recipeObj);
             })
-            .catch(function(err){
-                console.log(err,'error retrieving by ID');
-            });
+            .catch((err) => { console.error(err,'error retrieving by ID'); });
     };
 
 });

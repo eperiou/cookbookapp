@@ -1,6 +1,5 @@
 // 'use strict'
 require('dotenv').config();
-const PORT = process.env.PORT;
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -8,19 +7,20 @@ const MongoClient = require('mongodb').MongoClient;
 const User = require('./collections/User.js');
 const Recipe = require('./collections/recipe.js');
 const path = require('path');
-const request = require('request');
+const rp = require('request-promise');
 const http = require('http');
-var Promise = require('bluebird');
 let db;
+const Q = require('q');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+let findRecipe = Q.nbind(Recipe.find, Recipe);
+
   //  mongo db for sandbox environment
 
-mongoose.connect(process.env.MONGOURI, (err, database) => {
-    console.log('Mongodb connected');
-    app.listen(process.env.PORT, function () { console.log('server connected on ' +  PORT); });
+mongoose.connect('mongodb://eperiou:Tsukiyomi55@ds149329.mlab.com:49329/ezpz', (err, database) => {
+    app.listen(3000, function () { console.log('server connected on ' +  3000); });
     if (err) {
         console.log(err);
     } else {
@@ -29,22 +29,18 @@ mongoose.connect(process.env.MONGOURI, (err, database) => {
 });
 
 //route to retrieve all stored recipes
-/**setup express server and routes
- */
 app.use(express.static(path.join(__dirname +'/../users')));
 
 // make routes, post recipe, get recipes, search database
 app.post('/recipes', (req, res) => {
-    ///add new recipe
-    console.log(req.body,'router /recipes');
     new Recipe({ title: req.body.title,
         user: req.body.user,
         ingredients: req.body.ingredients,
         comments: req.body.comments}).save(req.body, (err, result) => {
             if (err) {
-                console.log(err);
+                res.send(err);
             } else {
-                console.log('recipe added to database');
+                res.send(('recipe added to database'));
             }
         });
 });
@@ -58,12 +54,9 @@ app.post('/recipes', (req, res) => {
  */
 
 app.get('/recipes', (req, res) => {
-    Recipe.find({},(err,recipes)=>{
-        if (err) {console.log(err); }
-        console.log(recipes,'recipe');
-        res.json(recipes);
-        console.log('recipe retrieval');
-    });
+    findRecipe({})
+        .then((recipes) => { res.send(recipes); })
+        .catch((err) => { res.send(err); });
 });
 
 //route to sign up new user
@@ -75,13 +68,10 @@ app.get('/recipes', (req, res) => {
  */
 
 app.post('/signup', (req, res) => {
-    new User({username:req.body.username,password:req.body.password}).save(req.body, (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('user added to database');
-            res.redirect('/');
-        }
+
+    console.log('signup')
+    new User({username:req.body.username, password:req.body.password}).save(req.body, (err, result) => {
+        if (err) { console.error(err); }
     });
 });
 /**
@@ -94,33 +84,37 @@ app.post('/signup', (req, res) => {
 
 
 app.post('/signin', (req, res) => {
-    console.log('signin',req.body);
-    User.findOne({username:req.body.username},'password', (err, password)=>{
-        if (err) {
-            console.log(err);
-        } else {
-                ///overly simple authentications
-            if(req.body.password === password.password ){
-                res.end(req.body.password);
-            }
-        }
-    });
+    const findUser = Q.nbind(User.findOne, User);
+    findUser({username:req.body.username},'password')
+       .then((password)=>{
+           if(req.body.password === password.password) {
+               res.redirect('/recipes');
+           }
+       })
+       .catch((err)=>{this.respond(err);});
 });
 
-app.get('/search', function(req,res){
-    // // http://food2fork.com/api/search
-    //
-    // req.query.key = process.env.Key;
-    // req.query.uri = 'http://food2fork.com/api/search';
-    // var obj = {
-    //
-    // };
-    // console.log(req.query,'server search');
-    request.get(`http://food2fork.com/api/search?key=${process.end.Key}&q=${req.query.q}&sort=sort=t` , function(err,res,body){
-        if(err){
-            console.log(err);
-        }else{
-            console.log(res);
+app.get('/search', (req,res, next) =>{
+    if(req.query.rId) { next();}
+    rp({
+        url: 'http://food2fork.com/api/search?key=c38fed7766c9317d7146b3b1b34ae875',
+        method:'GET',
+        params:req.query
+    })
+    .then(search=>res.send(search))
+    .catch(error=>res.send(error));
+}, (req,res, next) => {
+    rp({
+        url: 'http://food2fork.com/api/get',
+        method:'GET',
+        headers:{
+            'content-type': 'application/x-www-form-urlencoded',
+        },
+        qs:{
+            rId: req.query.rId,
+            key:'c38fed7766c9317d7146b3b1b34ae875',
         }
-    });
+    })
+    .then(search=>{res.send(search);})
+    .catch(error=> {res.send(error);});
 });

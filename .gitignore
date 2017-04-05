@@ -35,4 +35,4 @@ bower_components/
 .flooignore
 
 server/config/keys.js
-code/.env
+.env

@@ -5,10 +5,10 @@
     <title>Eric's MVP</title>
   </head>
   <h1>Not a member? Sign-up below</h1>
-  <form class="signupform" action="/signup" method="post">
-    <input type="text" name="username" placeholder="username">
-    <input type="text" name="password" placeholder="password">
+  <form ng-model="user" class="signinform" ng-controller="SignupController" ng-submit="signUp()">
+    <input type="text" ng-model="user.username" name="username" placeholder="username">
+    <input type="password" ng-model="user.password" name="password" placeholder="password">
     <button type="submit" >Sign up</button>
   </form>
-  <a href="#/signin">I'm already a user, go to login.</a>
+  <a href="#!/signin">I'm already a user, go to login.</a>
 </html>

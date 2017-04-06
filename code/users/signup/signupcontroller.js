@@ -13,6 +13,7 @@ angular.module('myApp.signup', [])
         })
         .catch((err) => {
             console.error(err);
+            $location.path('/');
         });
     };
 
@@ -22,7 +23,7 @@ angular.module('myApp.signup', [])
                 $location.path('/recipes');
             })
             .catch((err) => {
-                $location.path('/signin');
+                $location.path('/');
             });
     };
 

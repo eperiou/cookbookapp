@@ -2,10 +2,10 @@ FROM node
 
 CMD mkdir -p /app
 WORKDIR /app
-ADD /code/package.json /app
-CMD cd /app
-CMD npm install
 COPY . /app
+COPY /code/package.json /app
+RUN npm install
+
 EXPOSE 3000
 
-CMD cd code && npm start
+CMD cd /app/code && npm start

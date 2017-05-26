@@ -98,7 +98,7 @@ app.get('/search', (req,res, next) =>{
     rp({
         url: `http://food2fork.com/api/search?key=${process.env.KEY}`,
         method:'GET',
-        params:req.query
+        qs:req.query
     })
     .then(search=>res.send(search))
     .catch(error=>res.send(error));

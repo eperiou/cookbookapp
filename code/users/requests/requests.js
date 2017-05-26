@@ -69,10 +69,6 @@ angular.module('myApp.requests',[])
         })
         .then(resp => resp.data)
         .catch((error) => { console.error(error); });
-    
-
-
-
     return {
         signin: signin,
         signup: signup,

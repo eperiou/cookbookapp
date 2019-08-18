@@ -12,37 +12,31 @@ const http = require('http');
 let db;
 const Q = require('q');
 const app = express();
+const router = express.Router();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 require('dotenv').config();
 let findRecipe = Q.nbind(Recipe.find, Recipe);
 
-  //  mongo db for sandbox environment
-
-mongoose.connect(process.env.MONGOURI, (err, database) => {
-    app.listen(process.env.PORT, function () { console.log('server connected on ' +  process.env.PORT); });
-    if (err) {
-        console.log(err);
-    } else {
-        db = database;
-    }
-});
 
 //route to retrieve all stored recipes
 app.use(express.static(path.join(__dirname +'/../users')));
 
 // make routes, post recipe, get recipes, search database
-app.post('/recipes', (req, res) => {
-    new Recipe({ title: req.body.title,
+router.post('/recipes', (req, res) => {
+    new Recipe({
+        title: req.body.title,
         user: req.body.user,
         ingredients: req.body.ingredients,
-        comments: req.body.comments}).save(req.body, (err, result) => {
-            if (err) {
-                res.send(err);
-            } else {
-                res.send(('recipe added to database'));
-            }
-        });
+        comments: req.body.comments
+    }).save(req.body, (err, result) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(('recipe added to database'));
+        }
+    });
 });
 
 //route to retrieve all stored recipes
@@ -53,7 +47,7 @@ app.post('/recipes', (req, res) => {
  * @param will return object of recpie array
  */
 
-app.get('/recipes', (req, res) => {
+router.get('/recipes', (req, res) => {
     findRecipe({})
         .then((recipes) => { res.send(recipes); })
         .catch((err) => { res.send(err); });
@@ -67,7 +61,7 @@ app.get('/recipes', (req, res) => {
  * @param will return object of recpie array
  */
 
-app.post('/signup', (req, res) => {
+router.post('/signup', (req, res) => {
     new User({username:req.body.username, password:req.body.password}).save(req.body, (err, result) => {
         if (err) { console.error(err); }
         res.redirect('/');
@@ -82,18 +76,20 @@ app.post('/signup', (req, res) => {
  */
 
 
-app.post('/signin', (req, res) => {
+router.post('/signin', (req, res) => {
+    console.log(req.body.username);
     const findUser = Q.nbind(User.findOne, User);
     findUser({username:req.body.username},'password')
        .then((password)=>{
            if(req.body.password === password.password) {
+               console.log('redirect');
                res.redirect('/recipes');
            }
        })
-       .catch((err)=>{this.respond(err);});
+       .catch(console.log);
 });
 
-app.get('/search', (req,res, next) =>{
+router.get('/search', (req,res, next) =>{
     if(req.query.rId) { next();}
     rp({
         url: `http://food2fork.com/api/search?key=${process.env.KEY}`,
@@ -116,4 +112,16 @@ app.get('/search', (req,res, next) =>{
     })
     .then(search=>{res.send(search);})
     .catch(error=> {res.send(error);});
+});
+app.use(router);
+
+  //  mongo db for sandbox environment
+
+mongoose.connect(process.env.MONGOURI, (err, database) => {
+    if (err) {
+        console.log(err);
+    } else {
+        db = database;
+        app.listen(process.env.PORT, function () { console.log('server connected on ' +  process.env.PORT); });
+    }
 });

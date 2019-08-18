@@ -1,23 +1,21 @@
-angular.module('myApp.requests',[])
-.factory('Recipes', function ($http) {
-    const getAll = () => {
-        return $http({
-            method: 'GET',
-            url: '/recipes'
-        }).then(resp => resp.data)
-        .catch(err => console.error('getallerror',err));
-    };
+angular.module('myApp.requests', [])
+.factory('Recipes', ($http) => {
+    const getAll = () => $http({
+        method: 'GET',
+        url: '/recipes',
+    }).then(resp => resp.data)
+        .catch(err => console.error('getallerror', err));
     const searchRecipe = query =>
         $http({
             method: 'GET',
-            url: '/search' ,
-            headers:{
+            url: '/search',
+            headers: {
                 'Access-Control-Allow-Origin': '*',
             },
-            params:{
-                q:query.param,
+            params: {
+                q: query.param,
                 sort: 'sort=t',
-            }
+            },
         }).then(resp => resp)
         .catch(err => console.error(err));
 
@@ -26,51 +24,50 @@ angular.module('myApp.requests',[])
       $http({
           method: 'POST',
           url: '/recipes',
-          data: recipe
+          data: recipe,
       })
-      .then(resp=>resp)
+      .then(resp => resp)
       .catch(err => console.log(err));
 
     const findQueryById = recipeid =>
         $http({
             method: 'GET',
-            url: '/search'  ,
-            params:{
+            url: '/search',
+            params: {
                 rId: recipeid,
-            }
+            },
         })
         .then(resp => resp)
-        .catch((err) => { console.error(err); });
+        .catch(err => console.error(err));
 
-    ///make API call to food 2fork for new recipes
+    // /make API call to food 2fork for new recipes
 
     return {
-        getAll: getAll,
-        addRecipe: addRecipe,
-        searchRecipe: searchRecipe,
-        findQueryById: findQueryById
+        getAll,
+        addRecipe,
+        searchRecipe,
+        findQueryById,
     };
-}).factory('Auth', function ($http, $location, $window) {
-
+}).factory('Auth', ($http, $location, $window) => {
     const signin = user =>
     $http({
         method: 'POST',
         url: '/signin',
-        data: user
+        data: user,
     })
     .then(resp => resp.data)
-    .catch((error) => { console.error(error); });
+    .catch(error => console.error(error));
 
     const signup = user =>
         $http({
             method: 'POST',
             url: '/signup',
-            data: user
+            data: user,
         })
         .then(resp => resp.data)
-        .catch((error) => { console.error(error); });
+        .catch(error => console.error(error));
     return {
-        signin: signin,
-        signup: signup,
+        signin,
+        signup,
     };
 });

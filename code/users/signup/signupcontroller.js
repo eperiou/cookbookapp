@@ -3,7 +3,6 @@ angular.module('myApp.signup', [])
 
     $scope.data = {};
     $scope.user = {};
-
     $scope.data.recipes = [];
 
     $scope.signUp = () => {
@@ -20,6 +19,7 @@ angular.module('myApp.signup', [])
     $scope.signin =  () => {
         Auth.signin($scope.user)
             .then((password) => {
+                console.log(password);
                 $location.path('/recipes');
             })
             .catch((err) => {

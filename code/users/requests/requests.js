@@ -18,8 +18,8 @@ angular.module('myApp.requests',[])
                 q:query.param,
                 sort: 'sort=t',
             }
-        }).then((resp) => resp)
-        .catch((err) => { console.error(err); });
+        }).then(resp => resp)
+        .catch(err => console.error(err));
 
 
     const addRecipe = recipe =>
@@ -29,7 +29,7 @@ angular.module('myApp.requests',[])
           data: recipe
       })
       .then(resp=>resp)
-      .catch((err) => { console.log(err); });
+      .catch(err => console.log(err));
 
     const findQueryById = recipeid =>
         $http({

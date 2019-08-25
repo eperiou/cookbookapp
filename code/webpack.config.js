@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack'); 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         app: path.join(__dirname, './users/main.js'),
@@ -10,6 +10,11 @@ module.exports = {
     output: {
         filename: 'app-bundle.js',
         path: path.resolve(__dirname, 'dist'),
+    },
+    devServer : {
+        contentBase: path.join(__dirname,'./dist'),
+        compress: true,
+        port: 9000
     },
     module: {
         rules: [
@@ -85,6 +90,17 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'hot replacement',
+            minify: {
+                collapseWhitespace:true,
+            },
+            cache: true,
+            hash: true,
+            title: 'My App',
+            template: './dist/index.html',
+            inject: true,
+        }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // all options are optional

@@ -1,57 +1,100 @@
 <!DOCTYPE html>
-    <div id="container" ng-controller="RecipesController" ng-init="getRecipes()">
-      <h1>Add in your Own recipe</h1>
-        <div  class="contents">
-            <sidebar id="sidebar">
-                  <div class="recipes">
-                    <div class="recipeinput">
-                      <form ng-model="recipe" value="recipes" ng-submit="addOne()">
-                         Add your name
-                        <input type="text" ng-model="recipe.user" name="user" placeholder="Anonymous">
-                         Whats your dish's name?
-                        <input type="text" ng-model="recipe.title" name="title" placeholder="title">
-                         List ingredients
-                        <input type="text" ng-model="recipe.ingredients" name="ingredients" placeholder="ingredients">
-                        <input type="text" ng-model="recipe.comments"  name="comments" placeholder="comments">
-                        <button >Submit recipe</button>
-                      </form>
-                    </div>
-                  </div>
-                <h2>Find a new recipe</h2>
-                <form ng-model="recipe" value="query" ng-submit="search()">
-                      <input type="text" ng-model="query.param" name="param" placeholder="search">
-                      <button >Search food2fork</button>
-                </form>
-                <article id="ingredientlist">
-                    <h1>Ingredient list</h1>
-                    <div ng-model="ingredientlist" class="ingredientlist"  ng-repeat="ingredient in ingredientlist.ingredients track by $index" >
-                        <div class="ingredient" ng-click="ingredientlist.ingredients.splice($index,1)">{{ingredient}}</div>
-                    </div>
-                </article>
-            </sidebar>
-            <main id="main">
-                <div ng-repeat="recipe in data.recipes">
-                    <article ng-click = "addingredient(recipe.ingredients)" class="info">
-                      <div class="recipe">
-                       <h4 class="title"><strong>{{recipe.title}}</strong></h4>
-                          <div class="user">'Submitted by: {{recipe.user}}'</div>
-                          <div  class="ingredients">Ingredients: {{recipe.ingredients}}</div>
-                          <div class="comments">Comments: {{recipe.comments}}</div>
-                      </div>
-                    </article>
-                </div>
-                <div ng-model="query" class="search" ng-repeat="result in search.results">
-                    <article class="info">
-                      <div class="result">
-                        <span>
-                        <img ng-click="getingredients(result.recipe_id)" ng-src="{{result.image_url}}">
-                        <div class="user">'Published by :{{result.publisher}}'</div>
-                        <a  class="link" ng-href="{{result.f2f_url}}">{{result.f2f_url}}</a>
-                        </span>
-                        <h4 class="title"><strong>{{result.title}}</strong></h4>
-                      </div>
-                    </article>
-                </div>
-            </main>
+<div id="container" ng-controller="RecipesController" ng-init="getRecipes()">
+  <h1>Add in your Own Recipe</h1>
+  <div class="contents">
+    <sidebar id="sidebar">
+      <div class="recipes">
+        <div class="recipeinput">
+          <form ng-model="recipe" value="recipes" ng-submit="addOne()">
+            Add your name
+            <input
+              type="text"
+              ng-model="recipe.user"
+              name="user"
+              placeholder="Anonymous"
+            />
+            Whats your dish's name?
+            <input
+              type="text"
+              ng-model="recipe.title"
+              name="title"
+              placeholder="title"
+            />
+            List ingredients
+            <input
+              type="text"
+              ng-model="recipe.ingredients"
+              name="ingredients"
+              placeholder="ingredients"
+            />
+            <input
+              type="text"
+              ng-model="recipe.comments"
+              name="comments"
+              placeholder="comments"
+            />
+            <button>Submit recipe</button>
+          </form>
         </div>
-    </div>
+      </div>
+      <h2>Find a new recipe</h2>
+      <form ng-model="recipe" value="query" ng-submit="search()">
+        <input
+          type="text"
+          ng-model="query.param"
+          name="param"
+          placeholder="search"
+        />
+        <button>Search food2fork</button>
+      </form>
+      <article id="ingredientlist">
+        <h1>Ingredient list</h1>
+        <div
+          ng-model="ingredientlist"
+          class="ingredientlist"
+          ng-repeat="ingredient in ingredientlist.ingredients track by $index"
+        >
+          <div
+            class="ingredient"
+            ng-click="ingredientlist.ingredients.splice($index,1)"
+          >
+            {{ ingredient }}
+          </div>
+        </div>
+      </article>
+    </sidebar>
+    <main id="main">
+      <div ng-repeat="recipe in data.recipes">
+        <article ng-click="addingredient(recipe.ingredients)" class="info">
+          <div class="recipe">
+            <h4 class="title">
+              <strong>{{ recipe.title }}</strong>
+            </h4>
+            <div class="user">'Submitted by: {{ recipe.user }}'</div>
+            <div class="ingredients">Ingredients: {{ recipe.ingredients }}</div>
+            <div class="comments">Comments: {{ recipe.comments }}</div>
+          </div>
+        </article>
+      </div>
+      <div ng-model="query" class="search" ng-repeat="result in search.results">
+        <article class="info">
+          <div class="result">
+            <span>
+              <img
+                ng-click="getingredients(result.recipe_id)"
+                ng-src="{{ result.image_url }}"
+              />
+              <div class="user">'Published by :{{ result.publisher }}'</div>
+              <a class="link" ng-href="{{ result.f2f_url }}">{{
+                result.f2f_url
+              }}</a>
+            </span>
+            <h4 class="title">
+              <strong>{{ result.title }}</strong>
+            </h4>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+</div>

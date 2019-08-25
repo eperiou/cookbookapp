@@ -19,10 +19,10 @@ app.use(bodyParser.json());
 require('dotenv').config();
 let findRecipe = Q.nbind(Recipe.find, Recipe);
 
+// load static assets
+app.use(express.static(path.join(__dirname +'/../dist')));
 
 //route to retrieve all stored recipes
-app.use(express.static(path.join(__dirname +'/../users')));
-
 // make routes, post recipe, get recipes, search database
 router.post('/recipes', (req, res) => {
     new Recipe({

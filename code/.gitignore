@@ -34,3 +34,5 @@ bower_components/
 .floo
 .flooignore
 ./users/lib/*
+/node_modules/*
+/src/bower_components/*

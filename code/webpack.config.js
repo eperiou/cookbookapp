@@ -98,7 +98,7 @@ module.exports = {
             cache: true,
             hash: true,
             title: 'My App',
-            template: './dist/index.html',
+            template: 'users/template.html',
             inject: true,
         }),
         new MiniCssExtractPlugin({

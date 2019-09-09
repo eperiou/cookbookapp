@@ -11,20 +11,27 @@ var signinTemplate = require('./signup/signin.html');
 var recipeTemplate = require('./recipes/recipes.html');
 var auth0 = require('../bower_components/auth0.js/build/auth0');
 var angularauth = require('../bower_components/angular-auth0/src/index');
+var auth0service = require('./Auth/authService');
+var navbarDirective = require('./Navbar/navbar.directive');
+var navbarTemplate = require('./Navbar/navbar.html');
+var callback = require('./Callback/callback.controller');
+var callbackTemplate = require('./Callback/callback.html');
 var style = require('./styles/style.css');
 
-angular.module('myApp', ['ngRoute',
+const app = angular.module('myApp', ['ngRoute',
     'myApp.recipes',
     'myApp.requests',
     'myApp.signup',
-    'auth0.auth0'
-
-])
-.config(['$routeProvider', function($routeProvider,$httpProvider) {
+    'auth0.auth0',
+    'myApp.auth0Service',
+    'myApp.auth0Directive',
+    'myApp.callBackController'
+]);
+app.config(['$routeProvider','angularAuth0Provider','$locationProvider', function($routeProvider,angularAuth0Provider,$locationProvider) {
     $routeProvider.
     when('/', {
         template: signinTemplate,
-        controller: 'SigninController'
+        controller: 'SignupController'
     })
     .when('/signup', {
         template: signupTemplate,
@@ -37,4 +44,13 @@ angular.module('myApp', ['ngRoute',
     .otherwise({
         redirectTo: '/'
     });
+    angularAuth0Provider.init({
+        clientID: 'aPLDVs7W8qfgAPSpDDCKFUAPYbFnMmzR',
+        domain: 'ezpz-lemonsqueezy.auth0.com',
+        responseType: 'token id_token',
+        redirectUri: 'http://localhost:3000/callback',
+        scope: 'openid'
+    });
+}]).run(['auth0Service',function(auth0Service){
+    console.log(auth0Service);
 }]);

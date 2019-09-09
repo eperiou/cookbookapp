@@ -17,10 +17,12 @@ const router = express.Router();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 require('dotenv').config();
+
 let findRecipe = Q.nbind(Recipe.find, Recipe);
+const findUser = Q.nbind(User.findOne, User);
 
 // load static assets
-app.use(express.static(path.join(__dirname +'/../dist')));
+app.use(express.static(path.join(__dirname + '/../dist')));
 
 //route to retrieve all stored recipes
 // make routes, post recipe, get recipes, search database
@@ -48,8 +50,12 @@ router.post('/recipes', (req, res) => {
  */
 
 router.get('/recipes', (req, res) => {
+    console.log('recipes');
     findRecipe({})
-        .then((recipes) => { res.send(recipes); })
+        .then((recipes) => {
+            console.log(recipes);
+            res.send(recipes);
+        })
         .catch((err) => { res.send(err); });
 });
 
@@ -62,7 +68,7 @@ router.get('/recipes', (req, res) => {
  */
 
 router.post('/signup', (req, res) => {
-    new User({username:req.body.username, password:req.body.password}).save(req.body, (err, result) => {
+    new User({ username: req.body.username, password: req.body.password }).save(req.body, (err, result) => {
         if (err) { console.error(err); }
         res.redirect('/');
     });
@@ -78,50 +84,52 @@ router.post('/signup', (req, res) => {
 
 router.post('/signin', (req, res) => {
     console.log(req.body.username);
-    const findUser = Q.nbind(User.findOne, User);
-    findUser({username:req.body.username},'password')
-       .then((password)=>{
-           if(req.body.password === password.password) {
-               console.log('redirect');
-               res.redirect('/recipes');
-           }
-       })
-       .catch(console.log);
+    findUser({ username: req.body.username }, 'password')
+        .then((password) => {
+            if (req.body.password === password.password) {
+                console.log('redirect');
+                res.redirect('/recipes');
+                res.send
+            }
+        })
+        .catch((err) => {
+            res.send(err)
+            console.log(err);
+        });
 });
 
-router.get('/search', (req,res, next) =>{
-    if(req.query.rId) { next();}
+router.get('/search', (req, res, next) => {
+    if (req.query.rId) { next(); }
     rp({
-        url: `http://food2fork.com/api/search?key=${process.env.KEY}`,
-        method:'GET',
-        qs:req.query
-    })
-    .then(search=>res.send(search))
-    .catch(error=>res.send(error));
-}, (req,res, next) => {
+            url: `http://food2fork.com/api/search?key=${process.env.KEY}`,
+            method: 'GET',
+            qs: req.query
+        })
+        .then(search => res.send(search))
+        .catch(error => res.send(error));
+}, (req, res, next) => {
     rp({
-        url: 'http://food2fork.com/api/get',
-        method:'GET',
-        headers:{
-            'content-type': 'application/x-www-form-urlencoded',
-        },
-        qs:{
-            rId: req.query.rId,
-            key: process.env.KEY,
-        }
-    })
-    .then(search=>{res.send(search);})
-    .catch(error=> {res.send(error);});
+            url: 'http://food2fork.com/api/get',
+            method: 'GET',
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+            },
+            qs: {
+                rId: req.query.rId,
+                key: process.env.KEY,
+            }
+        })
+        .then(search => { res.send(search); })
+        .catch(error => { res.send(error); });
 });
+
 app.use(router);
-
-  //  mongo db for sandbox environment
-
+//  mongo db for sandbox environment
 mongoose.connect(process.env.MONGOURI, (err, database) => {
     if (err) {
         console.log(err);
     } else {
         db = database;
-        app.listen(process.env.PORT, function () { console.log('server connected on ' +  process.env.PORT); });
+        app.listen(process.env.PORT, function() { console.log('server connected on ' + process.env.PORT); });
     }
 });

@@ -1,7 +1,9 @@
-angular.module('myApp.auth0Service',[])
-    .factory('auth0Service',['$state', 'angularAuth0', '$timeout', authService ]);
+angular.module('myApp.authService', [])
+    .service('authService', authService);
 
-var authService = function($state, angularAuth0, $timeout) {
+//authService.$inject = ['$state', 'angularAuth0', '$timeout'];
+
+function authService($state, angularAuth0, $timeout) {
     var accessToken;
     var idToken;
     var expiresAt;
@@ -17,6 +19,7 @@ var authService = function($state, angularAuth0, $timeout) {
     function login() {
         angularAuth0.authorize();
     }
+
     function handleAuthentication() {
         angularAuth0.parseHash(function(err, authResult) {
             if (authResult && authResult.accessToken && authResult.idToken) {

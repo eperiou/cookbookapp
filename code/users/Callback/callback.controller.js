@@ -1,5 +1,5 @@
 angular
-    .module('myApp.callBackController',[])
-    .controller('myApp.callBackController',[ 'callback', callbackController ]);
+    .module('myApp.callBackController', [])
+    .controller('myApp.callBackController', ['callback', callbackController]);
 
-  // function callbackController() {};
+function callbackController() {};

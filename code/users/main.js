@@ -23,27 +23,27 @@ const app = angular.module('myApp', ['ngRoute',
     'myApp.requests',
     'myApp.signup',
     'auth0.auth0',
-    'myApp.auth0Service',
+    'myApp.authService',
     'myApp.auth0Directive',
     'myApp.callBackController'
 ]);
-app.config(['$routeProvider','angularAuth0Provider','$locationProvider', function($routeProvider,angularAuth0Provider,$locationProvider) {
+app.config(['$routeProvider', 'angularAuth0Provider', '$locationProvider', function($routeProvider, angularAuth0Provider, $locationProvider) {
     $routeProvider.
     when('/', {
-        template: signinTemplate,
-        controller: 'SignupController'
-    })
-    .when('/signup', {
-        template: signupTemplate,
-        controller: 'SignupController'
-    })
-    .when('/recipes',{
-        template: recipeTemplate,
-        controller: 'RecipesController'
-    })
-    .otherwise({
-        redirectTo: '/'
-    });
+            template: signinTemplate,
+            controller: 'SignupController'
+        })
+        .when('/signup', {
+            template: signupTemplate,
+            controller: 'SignupController'
+        })
+        .when('/recipes', {
+            template: recipeTemplate,
+            controller: 'RecipesController'
+        })
+        .otherwise({
+            redirectTo: '/'
+        });
     angularAuth0Provider.init({
         clientID: 'aPLDVs7W8qfgAPSpDDCKFUAPYbFnMmzR',
         domain: 'ezpz-lemonsqueezy.auth0.com',
@@ -51,6 +51,5 @@ app.config(['$routeProvider','angularAuth0Provider','$locationProvider', functio
         redirectUri: 'http://localhost:3000/callback',
         scope: 'openid'
     });
-}]).run(['auth0Service',function(auth0Service){
-    console.log(auth0Service);
-}]);
+}])
+app.run(console.warn);

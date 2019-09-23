@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Cook Book</title>
+    <base href="/">
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -15,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
   </head>
   <body  class="container" ng-app="myApp">
+    <div nav-bar></div>
     <div ng-view="$routeProvider.templateUrl"></div>
   </body>
 </html>

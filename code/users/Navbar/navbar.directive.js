@@ -1,18 +1,22 @@
-
+import navbarTemplate from './navbar.html';
 angular
-    .module('myApp.auth0Directive',[])
-    .directive('auth0Directive',['authService',navbar] );
+    .module('myApp.navbar',[])
+    .directive('navbar',['authService',
+        function () {
+            function navbarController(authService) {
+                var vm = this;
+                vm.auth = authService;
+            }
+        
+            return {
+                template: navbarTemplate,
+                controller: navbarController,
+                controllerAs: 'vm'
+            };
+        }
+    ]);
     
-function navbar() {
-    return {
-        templateUrl: 'app/navbar/navbar.html',
-        controller: navbarController,
-        controllerAs: 'vm'
-    };
-}
+
 
     
-function navbarController(authService) {
-    var vm = this;
-    vm.auth = authService;
-}
+

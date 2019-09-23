@@ -16,15 +16,14 @@ angular.module('myApp.signup', [])
     };
 
     $scope.signin = () => {
-        authService.login();
-        // Auth.signin($scope.user)
-        //     .then((password) => {
-        //         console.log(password);
-        //         $location.path('/recipes');
-        //     })
-        //     .catch((err) => {
-        //         console.error(err);
-        //         $location.path('/');
-        //     });
+        Auth.signin($scope.user)
+            .then((password) => {
+                console.log(password);
+                $location.path('/recipes');
+            })
+            .catch((err) => {
+                console.error(err);
+                $location.path('/');
+            });
     };
 });

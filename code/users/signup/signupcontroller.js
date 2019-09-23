@@ -1,5 +1,5 @@
 angular.module('myApp.signup', [])
-.controller('SignupController', ($scope, $location, Recipes, Auth) => {
+.controller('SignupController', ($scope, $location, Auth, authService) => {
     $scope.data = {};
     $scope.user = {};
     $scope.data.recipes = [];
@@ -16,14 +16,15 @@ angular.module('myApp.signup', [])
     };
 
     $scope.signin = () => {
-        Auth.signin($scope.user)
-            .then((password) => {
-                console.log(password);
-                $location.path('/recipes');
-            })
-            .catch((err) => {
-                console.error(err);
-                $location.path('/');
-            });
+        authService.login();
+        // Auth.signin($scope.user)
+        //     .then((password) => {
+        //         console.log(password);
+        //         $location.path('/recipes');
+        //     })
+        //     .catch((err) => {
+        //         console.error(err);
+        //         $location.path('/');
+        //     });
     };
 });

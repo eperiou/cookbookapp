@@ -16,6 +16,8 @@
   "dependencies": {
     "@babel/core": "^7.5.5",
     "Babel": "0.0.1",
+    "angular-auth0": "^3.0.4",
+    "auth0-js": "^9.11.3",
     "body-parser": "^1.19.0",
     "dotenv": "^4.0.0",
     "express": "^4.17.1",
@@ -43,7 +45,7 @@
     "nodemon": "^1.19.1",
     "style-loader": "^1.0.0",
     "url-loader": "^2.1.0",
-    "webpack": "^4.39.2",
+    "webpack": "^4.40.2",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
   },

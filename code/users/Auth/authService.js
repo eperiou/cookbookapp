@@ -61,6 +61,7 @@ angular.module('myApp.authService',[])
             
                 angularAuth0.logout({
                     returnTo: window.location.origin
+
                 });
             
                 $location.path('/');

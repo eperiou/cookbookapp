@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname + '/../dist')));
 
 //route to retrieve all stored recipes
 // make routes, post recipe, get recipes, search database
-router.post('/recipes', (req, res) => {
+router.post('/postrecipes', (req, res) => {
     new Recipe({
         title: req.body.title,
         user: req.body.user,
@@ -49,7 +49,7 @@ router.post('/recipes', (req, res) => {
  * @param will return object of recpie array
  */
 
-router.get('/recipes', (req, res) => {
+router.get('/getrecipes', (req, res) => {
     console.log('recipes');
     findRecipe({})
         .then((recipes) => {
@@ -125,7 +125,7 @@ router.get('/search', (req, res, next) => {
 
 app.use(router);
 //  mongo db for sandbox environment
-mongoose.connect(process.env.MONGOURI, (err, database) => {
+mongoose.connect(process.env.MONGOURI,{useNewUrlParser: true},(err, database) => {
     if (err) {
         console.log(err);
     } else {

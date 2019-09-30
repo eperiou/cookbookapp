@@ -7,12 +7,14 @@ var bootstrapStylev = require('../bower_components/bootstrap4/dist/css/bootstrap
 
 var recipes = require('./recipes/recipescontroller');
 var requests = require('./requests/requests');
-var requests = require('./signup/signupcontroller');
+var signupcontroller = require('./signup/signupcontroller');
+var callbacks = require('./Callback/callbackcontroller');
+
 var signupTemplate = require('./signup/signup.html');
 var signinTemplate = require('./signup/signin.html');
 var recipeTemplate = require('./recipes/recipes.html');
 var navbarTemplate = require('./Navbar/navbar.directive');
-var callbackTemplate = require('./Callback/callback.controller');
+var callbackTemplate = require('./Callback/callback.html');
 
 var style = require('./styles/style.css');
 var auth0 = require('../bower_components/auth0.js/src/index');
@@ -44,7 +46,7 @@ app.config(['$routeProvider', 'angularAuth0Provider','$locationProvider',
         })
         .when('/callback',{
             template: callbackTemplate,
-            controller: 'callBackController'
+            controller: 'CallBackController'
         })
         .otherwise({
             redirectTo: '/'
@@ -53,9 +55,19 @@ app.config(['$routeProvider', 'angularAuth0Provider','$locationProvider',
             clientID: 'aPLDVs7W8qfgAPSpDDCKFUAPYbFnMmzR',
             domain: 'ezpz-lemonsqueezy.auth0.com',
             responseType: 'token id_token',
-            redirectUri: 'http://localhost:8080/callback',
+            redirectUri: 'http://localhost:3000/#/callback',
             scope: 'openid'
         });
+        
         $locationProvider.hashPrefix('');
         $locationProvider.html5Mode(true);
     }]);
+app.run(['authService', function(authService){
+    if (authService.isAuthenticated()) {
+        authService.renewTokens();
+    } else {
+    // Handle the authentication
+    // result in the hash
+        authService.handleAuthentication();
+    }
+}]);

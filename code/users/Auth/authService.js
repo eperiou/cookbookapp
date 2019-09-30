@@ -8,11 +8,9 @@ angular.module('myApp.authService',[])
             function getIdToken() {
                 return idToken;
             }
-        
             function getAccessToken() {
                 return accessToken;
             }
-        
             function login() {
                 angularAuth0.authorize();
             }
@@ -25,7 +23,6 @@ angular.module('myApp.authService',[])
                         $timeout(function() {
                             $location.path('/');
                         });
-                        console.log(err);
                     }
                 });
             }

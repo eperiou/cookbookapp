@@ -1,6 +1,6 @@
 angular.module('myApp.requests', [])
     .factory('Recipes', ($http) => {
-        const getAll = () => $http.get('/recipes').then(resp => resp.data)
+        const getAll = () => $http.get('/getrecipes').then(resp => resp.data)
             .catch(err => console.log(err));
 
         const searchRecipe = query =>
@@ -21,7 +21,7 @@ angular.module('myApp.requests', [])
         const addRecipe = recipe =>
             $http({
                 method: 'POST',
-                url: '/recipes',
+                url: '/postrecipes',
                 data: recipe,
             })
             .then(resp => resp)

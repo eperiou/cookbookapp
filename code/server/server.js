@@ -13,9 +13,10 @@ let db;
 const Q = require('q');
 const app = express();
 const router = express.Router();
+const cors = require('cors');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json(), cors());
 require('dotenv').config();
 
 let findRecipe = Q.nbind(Recipe.find, Recipe);
@@ -48,7 +49,7 @@ router.post('/postrecipes', (req, res) => {
  * @param res, response body
  * @param will return object of recpie array
  */
-
+router.options('/getrecipes', cors());
 router.get('/getrecipes', (req, res) => {
     console.log('recipes');
     findRecipe({})
@@ -97,35 +98,35 @@ router.post('/signin', (req, res) => {
             console.log(err);
         });
 });
-
+router.options('/search', cors());
 router.get('/search', (req, res, next) => {
     if (req.query.rId) { next(); }
     rp({
-        url: `http://food2fork.com/api/search?key=${process.env.KEY}`,
-        method: 'GET',
-        qs: req.query
-    })
-    .then(search => res.send(search))
-    .catch(error => res.send(error));
+            url: `http://food2fork.com/api/search?key=${process.env.KEY}`,
+            method: 'GET',
+            qs: req.query
+        })
+        .then(search => res.send(search))
+        .catch(error => res.send(error));
 }, (req, res, next) => {
     rp({
-        url: 'http://food2fork.com/api/get',
-        method: 'GET',
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded',
-        },
-        qs: {
-            rId: req.query.rId,
-            key: process.env.KEY,
-        }
-    })
-    .then(search => { res.send(search); })
-    .catch(error => { res.send(error); });
+            url: 'http://food2fork.com/api/get',
+            method: 'GET',
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+            },
+            qs: {
+                rId: req.query.rId,
+                key: process.env.KEY,
+            }
+        })
+        .then(search => { res.send(search); })
+        .catch(error => { res.send(error); });
 });
 
 app.use(router);
 //  mongo db for sandbox environment
-mongoose.connect(process.env.MONGOURI,{useNewUrlParser: true},(err, database) => {
+mongoose.connect(process.env.MONGOURI, { useNewUrlParser: true }, (err, database) => {
     if (err) {
         console.log(err);
     } else {

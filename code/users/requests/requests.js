@@ -1,12 +1,14 @@
 angular.module('myApp.requests', [])
-    .factory('Recipes', ($http) => {
-        const getAll = () => $http.get('/getrecipes').then(resp => resp.data)
+    .factory('Recipes', ['$http', '__env', ($http, __env) => {
+        const getAll = () =>
+            $http.get(`${__env.apiUrl}/getrecipes`)
+            .then(resp => resp.data)
             .catch(err => console.log(err));
 
         const searchRecipe = query =>
             $http({
                 method: 'GET',
-                url: '/search',
+                url: `${__env.apiUrl}/search`,
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -21,7 +23,7 @@ angular.module('myApp.requests', [])
         const addRecipe = recipe =>
             $http({
                 method: 'POST',
-                url: '/postrecipes',
+                url: `${__env.apiUrl}/postrecipes`,
                 data: recipe,
             })
             .then(resp => resp)
@@ -30,7 +32,7 @@ angular.module('myApp.requests', [])
         const findQueryById = recipeid =>
             $http({
                 method: 'GET',
-                url: '/search',
+                url: `${__env.apiUrl}/search`,
                 params: {
                     rId: recipeid,
                 },
@@ -46,11 +48,11 @@ angular.module('myApp.requests', [])
             searchRecipe,
             findQueryById,
         };
-    }).factory('Auth', ($http, $location, $window) => {
+    }]).factory('Auth', ['$http', '__env', ($http) => {
         const signin = user =>
             $http({
                 method: 'POST',
-                url: '/signin',
+                url: `${__env.apiUrl}/signin`,
                 data: user,
             })
             .then(resp => resp.data)
@@ -59,7 +61,7 @@ angular.module('myApp.requests', [])
         const signup = user =>
             $http({
                 method: 'POST',
-                url: '/signup',
+                url: `${__env.apiUrl}/signup`,
                 data: user,
             })
             .then(resp => resp.data)
@@ -68,4 +70,4 @@ angular.module('myApp.requests', [])
             signin,
             signup,
         };
-    });
+    }]);

@@ -40,7 +40,7 @@
                 </div>
             </article>
         </sidebar>
-        <main id="main col">
+        <main id="main" class="col">
             <div ng-repeat="recipe in data.recipes">
                 <article ng-click="addingredient(recipe.ingredients)" class="info">
                     <div class="recipe">
@@ -53,7 +53,7 @@
                     </div>
                 </article>
             </div>
-            <div ng-model="query" class="search" ng-repeat="result in search.results">
+            <div ng-model="query" class="search" ng-repeat="result in searchresults">
                 <article class="info">
                     <div class="result">
                         <span>

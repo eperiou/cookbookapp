@@ -1,5 +1,5 @@
 var path = require('path');
-var webpack = require('webpack'); 
+var webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
@@ -11,10 +11,9 @@ module.exports = {
         filename: 'app-bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
-    devServer : {
-        contentBase: path.join(__dirname,'./dist'),
-        compress: true,
-        port: 9000
+    devServer: {
+        contentBase: path.join(__dirname, './users'),
+        port: 8080
     },
     module: {
         rules: [
@@ -28,16 +27,15 @@ module.exports = {
                 options: '$'
                 }]
             },*/
-            
-            { 
-                test: /\.js$/, 
-                use: 'babel-loader', 
-                exclude: /node_modules/ 
+
+            {
+                test: /\.js$/,
+                use: 'babel-loader',
+                exclude: /node_modules/
             },
-            { 
+            {
                 test: /\.css$/,
-                use: [
-                    {
+                use: [{
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             // you can specify a publicPath here
@@ -49,42 +47,42 @@ module.exports = {
                     'css-loader',
                 ],
             },
-            { 
-                test: /\.sass$/, 
+            {
+                test: /\.sass$/,
                 loaders: [
-                    'style-loader', 
+                    'style-loader',
                     'css-loader'
-                ] 
+                ]
             },
-            { 
-                test: /\.html$/, 
-                use: 'html-loader' 
+            {
+                test: /\.html$/,
+                use: 'html-loader'
             },
             // inline base64 URLs for <=8k images, direct URLs for the rest
-            { 
-                test: /\.(png|jpg)$/, 
-                use: 'url-loader?limit=8192' 
+            {
+                test: /\.(png|jpg)$/,
+                use: 'url-loader?limit=8192'
             },
             // helps to load bootstrap's css.
-            { 
+            {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                use: 'url?limit=10000&minetype=application/font-woff' 
+                use: 'url?limit=10000&minetype=application/font-woff'
             },
-            { 
+            {
                 test: /\.woff2$/,
-                use: 'url?limit=10000&minetype=application/font-woff' 
+                use: 'url?limit=10000&minetype=application/font-woff'
             },
-            { 
+            {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                use: 'url?limit=10000&minetype=application/octet-stream' 
+                use: 'url?limit=10000&minetype=application/octet-stream'
             },
-            { 
+            {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                use: 'file' 
+                use: 'file'
             },
-            { 
+            {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                use: 'url?limit=10000&minetype=image/svg+xml' 
+                use: 'url?limit=10000&minetype=image/svg+xml'
             }
         ]
     },
@@ -93,7 +91,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'hot replacement',
             minify: {
-                collapseWhitespace:true,
+                collapseWhitespace: true,
             },
             cache: true,
             hash: true,
@@ -109,10 +107,5 @@ module.exports = {
             ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
     ],
-    devServer: {
-        publicPath: '/',
-        contentBase: path.join(__dirname, '/public'),
-        compress: true
-    },
     devtool: 'eval'
 };

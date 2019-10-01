@@ -9,11 +9,12 @@ var recipes = require('./recipes/recipescontroller');
 var requests = require('./requests/requests');
 var signupcontroller = require('./signup/signupcontroller');
 var callbacks = require('./Callback/callbackcontroller');
+var navbar = require('./Navbar/navbar.directive');
 
 var signupTemplate = require('./signup/signup.html');
 var signinTemplate = require('./signup/signin.html');
 var recipeTemplate = require('./recipes/recipes.html');
-var navbarTemplate = require('./Navbar/navbar.directive');
+var navbarTemplate = require('./Navbar/navbar.html');
 var callbackTemplate = require('./Callback/callback.html');
 
 var style = require('./styles/style.css');
@@ -32,14 +33,14 @@ const app = angular.module('myApp', ['ngRoute',
     'auth0.auth0',
     'myApp.authService',
     'myApp.navbar',
-    'myApp.callBackController'
+    'myApp.callBackController',
+    'myApp.navbar'
 ]);
 app.constant('__env', env);
 app.config(['$routeProvider', 'angularAuth0Provider', '$locationProvider',
     function($routeProvider, angularAuth0Provider, $locationProvider) {
-
-        $routeProvider.
-        when('/', {
+        $routeProvider
+            .when('/', {
                 template: signinTemplate,
                 controller: 'SignupController'
             })
@@ -50,6 +51,7 @@ app.config(['$routeProvider', 'angularAuth0Provider', '$locationProvider',
             .when('/recipes', {
                 template: recipeTemplate,
                 controller: 'RecipesController'
+
             })
             .when('/callback', {
                 template: callbackTemplate,
@@ -65,17 +67,27 @@ app.config(['$routeProvider', 'angularAuth0Provider', '$locationProvider',
             redirectUri: `${env.hostURL}/#/callback`,
             scope: 'openid'
         });
-
         $locationProvider.hashPrefix('');
         //$locationProvider.html5Mode(true);
     }
 ]);
-app.run(['authService', function(authService) {
+app.run(['authService', '$rootScope', '$location', function(authService, $rootScope, $location) {
     if (authService.isAuthenticated()) {
         authService.renewTokens();
     } else {
-        // Handle the authentication
-        // result in the hash
         authService.handleAuthentication();
     }
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+
+        if (next.controller != "SignupController") {
+            if (!authService.isAuthenticated()) {
+                console.log('denied', event);
+                event.preventDefault();
+                $location.path('/');
+            } else {
+                console.log('allowed', event);
+                $location.path('/recipes')
+            }
+        }
+    })
 }]);

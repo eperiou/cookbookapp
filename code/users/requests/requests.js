@@ -1,5 +1,10 @@
 angular.module('myApp.requests', [])
     .factory('Recipes', ['$http', '__env', ($http, __env) => {
+        if (!__env) {
+            __env = {
+                apiUrl: "",
+            }
+        }
         const getAll = () =>
             $http.get(`${__env.apiUrl}/getrecipes`)
             .then(resp => resp.data)

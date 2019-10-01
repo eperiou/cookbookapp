@@ -10,9 +10,11 @@ module.exports = {
     output: {
         filename: 'app-bundle.js',
         path: path.resolve(__dirname, 'dist'),
+        devtoolModuleFilenameTemplate: '../[resource-path]'
     },
     devServer: {
         contentBase: path.join(__dirname, './users'),
+        compress: true,
         port: 8080
     },
     module: {
@@ -107,5 +109,6 @@ module.exports = {
             ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
     ],
-    devtool: 'eval'
+
+    devtool: 'source-map',
 };

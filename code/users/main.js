@@ -15,6 +15,8 @@ var signupTemplate = require('./signup/signup.html');
 var signinTemplate = require('./signup/signin.html');
 var splashPage = require("./signup/splashpage.html");
 var recipeTemplate = require('./recipes/recipes.html');
+var makeARecipeTemplate = require("./MakeARecipe/makearecipe.html");
+var findInspirationTemplate = require("./findInspiration/findInspiration.html");
 var navbarTemplate = require('./Navbar/navbar.html');
 var callbackTemplate = require('./Callback/callback.html');
 
@@ -44,14 +46,25 @@ app.config(['$routeProvider', 'angularAuth0Provider', '$locationProvider',
                 template: splashPage,
                 controller: 'NavBar'
             })
-            .when('/recipes', {
-                template: recipeTemplate,
+
+        .when('/makeARecipe', {
+                template: makeARecipeTemplate,
+                controller: 'RecipesController'
+
+            })
+            .when('/findInspiration', {
+                template: findInspirationTemplate,
                 controller: 'RecipesController'
 
             })
             .when('/callback', {
                 template: callbackTemplate,
                 controller: 'CallBackController'
+            })
+            .when('/recipes', {
+                template: recipeTemplate,
+                controller: 'RecipesController'
+
             })
             .otherwise({
                 redirectTo: '/'
@@ -64,7 +77,7 @@ app.config(['$routeProvider', 'angularAuth0Provider', '$locationProvider',
             scope: 'openid'
         });
         $locationProvider.hashPrefix('');
-        //$locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(true);
     }
 ]);
 app.run(['authService', '$rootScope', '$location', function(authService, $rootScope, $location) {
@@ -80,9 +93,6 @@ app.run(['authService', '$rootScope', '$location', function(authService, $rootSc
                 console.log('denied', event);
                 event.preventDefault();
                 $location.path('/');
-            } else {
-                console.log('allowed', event);
-                $location.path('/recipes')
             }
         }
     })

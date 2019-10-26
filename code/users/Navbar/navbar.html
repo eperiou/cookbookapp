@@ -1,9 +1,9 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header ">
-            <button class="btn btn-primary btn-margin" ng-if="!auth.isAuthenticated()" ng-click="auth.login()">
-                Log In
-            </button>
+            <a href="#/recipes">Recipes</a>
+            <a href="#/addYourOwn">Add your own!</a>
+            <a href="#/inspiration">Find inspiration</a>
             <button class="btn btn-primary btn-margin" ng-if="auth.isAuthenticated()" ng-click="auth.logout()">
                 Log Out
             </button>

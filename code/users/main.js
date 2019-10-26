@@ -13,6 +13,7 @@ var navbar = require('./Navbar/navbar.directive');
 
 var signupTemplate = require('./signup/signup.html');
 var signinTemplate = require('./signup/signin.html');
+var splashPage = require("./signup/splashpage.html");
 var recipeTemplate = require('./recipes/recipes.html');
 var navbarTemplate = require('./Navbar/navbar.html');
 var callbackTemplate = require('./Callback/callback.html');
@@ -40,12 +41,8 @@ app.config(['$routeProvider', 'angularAuth0Provider', '$locationProvider',
     function($routeProvider, angularAuth0Provider, $locationProvider) {
         $routeProvider
             .when('/', {
-                template: signinTemplate,
-                controller: 'SignupController'
-            })
-            .when('/signup', {
-                template: signupTemplate,
-                controller: 'SignupController'
+                template: splashPage,
+                controller: 'NavBar'
             })
             .when('/recipes', {
                 template: recipeTemplate,
@@ -78,7 +75,7 @@ app.run(['authService', '$rootScope', '$location', function(authService, $rootSc
     }
     $rootScope.$on('$routeChangeStart', function(event, next) {
 
-        if (next.controller != "SignupController") {
+        if (next.controller != "NavBar") {
             if (!authService.isAuthenticated()) {
                 console.log('denied', event);
                 event.preventDefault();

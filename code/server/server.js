@@ -1,5 +1,4 @@
 // 'use strict'
-
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -21,9 +20,8 @@ const mongoPromise = Q.bind(mongoose.connect, process.env.MONGOURI, { useNewUrlP
 // load static assets
 app.use(express.static(path.join(__dirname + '/../dist')));
 
-//route to retrieve all stored recipes
-// make routes, post recipe, get recipes, search database
 router.post('/postrecipes', recipeMiddleware.postRecipe);
+
 router.options('/getrecipes', cors());
 router.get('/getrecipes', recipeMiddleware.getAllRecipes);
 

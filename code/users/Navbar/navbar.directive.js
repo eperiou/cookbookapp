@@ -1,18 +1,12 @@
-import navbarTemplate from './navbar.html';
+var navbarTemplate = require('./navbar.html');
 angular
     .module('myApp.navbar', [])
-    .directive('navbar', ['authService',
-        function() {
-            function navbarController(authService) {
-                var vm = this;
-                vm.auth = authService;
-                console.log(authService.expiresAt);
-            }
-
-            return {
-                template: navbarTemplate,
-                controller: navbarController,
-                controllerAs: 'vm'
-            };
-        }
-    ]);
+    .controller("NavBar", ['$scope', 'authService', function($scope, authService) {
+        $scope.auth = authService;
+        console.log(authService);
+    }])
+    .directive('navBar', function() {
+        return {
+            template: navbarTemplate
+        };
+    });

@@ -32,7 +32,6 @@ const app = angular.module('myApp', ['ngRoute',
     'myApp.signup',
     'auth0.auth0',
     'myApp.authService',
-    'myApp.navbar',
     'myApp.callBackController',
     'myApp.navbar'
 ]);
@@ -77,7 +76,7 @@ app.run(['authService', '$rootScope', '$location', function(authService, $rootSc
     } else {
         authService.handleAuthentication();
     }
-    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+    $rootScope.$on('$routeChangeStart', function(event, next) {
 
         if (next.controller != "SignupController") {
             if (!authService.isAuthenticated()) {

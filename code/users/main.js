@@ -7,12 +7,9 @@ var bootstrapStylev = require('../bower_components/bootstrap4/dist/css/bootstrap
 
 var recipes = require('./recipes/recipescontroller');
 var requests = require('./requests/requests');
-var signupcontroller = require('./signup/signupcontroller');
 var callbacks = require('./Callback/callbackcontroller');
 var navbar = require('./Navbar/navbar.directive');
 
-var signupTemplate = require('./signup/signup.html');
-var signinTemplate = require('./signup/signin.html');
 var splashPage = require("./signup/splashpage.html");
 var recipeTemplate = require('./recipes/recipes.html');
 var makeARecipeTemplate = require("./MakeARecipe/makearecipe.html");
@@ -32,7 +29,6 @@ if (window) {
 const app = angular.module('myApp', ['ngRoute',
     'myApp.recipes',
     'myApp.requests',
-    'myApp.signup',
     'auth0.auth0',
     'myApp.authService',
     'myApp.callBackController',

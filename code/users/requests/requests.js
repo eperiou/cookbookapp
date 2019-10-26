@@ -5,10 +5,12 @@ angular.module('myApp.requests', [])
                 apiUrl: "",
             }
         }
-        const getAll = () =>
-            $http.get(`${__env.apiUrl}/getrecipes`)
-            .then(resp => resp.data)
-            .catch(err => console.log(err));
+        const getAll = () => {
+            console.log('getall RECIPEs', __env.apiUrl)
+            return $http.get(`${__env.apiUrl}/getrecipes`)
+                .then(resp => resp.data)
+                .catch(err => console.log(err));
+        }
 
         const searchRecipe = query =>
             $http({

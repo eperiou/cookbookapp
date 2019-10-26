@@ -77,7 +77,7 @@ app.config(['$routeProvider', 'angularAuth0Provider', '$locationProvider',
             scope: 'openid'
         });
         $locationProvider.hashPrefix('');
-        $locationProvider.html5Mode(true);
+        //$locationProvider.html5Mode(true);
     }
 ]);
 app.run(['authService', '$rootScope', '$location', function(authService, $rootScope, $location) {

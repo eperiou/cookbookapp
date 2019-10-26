@@ -14,8 +14,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
-    Add a recipe page
+<body ng-controller="RecipesController" class="sidebar">
+    <div class="recipes">
+        <div class="recipeinput">
+            <form ng-model="recipe" class="form-group" value="recipes" ng-submit="addOne()">
+                <div class="form-group">
+                    <label>Add your name</label>
+                    <input class="form-control" type="text" ng-model="recipe.user" name="user" placeholder="Anonymous" />
+                </div>
+                <div class="form-group">
+                    <label> Whats your dish's name?</label>
+                    <input class="form-control" type="text" ng-model="recipe.title" name="title" placeholder="title" />
+                </div>
+                <div class="form-group">
+                    <label>List ingredients</label>
+                    <input class="form-control" type="text" ng-model="recipe.ingredients" name="ingredients" placeholder="ingredients" />
+                </div>
+                <div class="form-group">
+                    <label>Any comments or techniques</label>
+                    <input class="form-control" type="text" ng-model="recipe.comments" name="comments" placeholder="comments" />
+                </div>
+                <button class="recipes">Submit recipe</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

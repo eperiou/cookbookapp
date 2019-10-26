@@ -14,8 +14,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
-    Inspiration page
+<body ng-controller="RecipesController">
+    <form ng-model="recipe" value="query" ng-submit="search()">
+        <h2>Find a new recipe</h2>
+        <input type="text" ng-model="query.param" name="param" placeholder="search" />
+        <button>Search food2fork</button>
+    </form>
+    <main class="col">
+        <div ng-repeat="recipe in data.recipes">
+            <article ng-click="addingredient(recipe.ingredients)" class="info">
+                <div class="recipe">
+                    <h4 class="title">
+                        <strong>{{ recipe.title }}</strong>
+                    </h4>
+                    <div class="user">'Submitted by: {{ recipe.user }}'</div>
+                    <div class="ingredients">Ingredients: {{ recipe.ingredients }}</div>
+                    <div class="comments">Comments: {{ recipe.comments }}</div>
+                </div>
+            </article>
+        </div>
+        <div ng-model="query" class="search" ng-repeat="result in searchresults">
+            <article class="info">
+                <div class="result row my-3">
+                    <div class="col-md-4">
+                        <img height="100" width="150" ng-click="getingredients(result.recipe_id)" ng-src="{{ result.image_url }}" />
+                    </div>
+                    <div class="col-md-8">
+                        <h4 class="title">
+                            <strong>{{ result.title }}</strong>
+                        </h4>
+                        <div class="user">Published by :{{ result.publisher }}</div>
+                        <a class="link" ng-href="{{ result.f2f_url }}">{{
+                                result.f2f_url
+                            }}</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
 </body>
 
 </html>

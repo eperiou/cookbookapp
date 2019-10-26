@@ -3,29 +3,7 @@
     <h1>Add in your Own Recipe</h1>
     <div class="contents row">
         <sidebar id="sidebar" class="col">
-            <div class="recipes">
-                <div class="recipeinput">
-                    <form ng-model="recipe" class="form-group" value="recipes" ng-submit="addOne()">
-                        <div class="form-group">
-                            <label>Add your name</label>
-                            <input class="form-control" type="text" ng-model="recipe.user" name="user" placeholder="Anonymous" />
-                        </div>
-                        <div class="form-group">
-                            <label> Whats your dish's name?</label>
-                            <input class="form-control" type="text" ng-model="recipe.title" name="title" placeholder="title" />
-                        </div>
-                        <div class="form-group">
-                            <label>List ingredients</label>
-                            <input class="form-control" type="text" ng-model="recipe.ingredients" name="ingredients" placeholder="ingredients" />
-                        </div>
-                        <div class="form-group">
-                            <label>Any comments or techniques</label>
-                            <input class="form-control" type="text" ng-model="recipe.comments" name="comments" placeholder="comments" />
-                        </div>
-                        <button class="recipes">Submit recipe</button>
-                    </form>
-                </div>
-            </div>
+
             <form ng-model="recipe" value="query" ng-submit="search()">
                 <h2>Find a new recipe</h2>
                 <input type="text" ng-model="query.param" name="param" placeholder="search" />

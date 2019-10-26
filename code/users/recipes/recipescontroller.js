@@ -1,5 +1,5 @@
 angular.module('myApp.recipes', [])
-    .controller('RecipesController', ['$scope', 'Recipes', function($scope, Recipes) {
+    .controller('RecipesController', ['$scope', 'Recipes', '$location', function($scope, Recipes, $location) {
         $scope.data = {};
         $scope.data.recipes = [];
         $scope.ingredientlist = {};
@@ -16,9 +16,11 @@ angular.module('myApp.recipes', [])
          * @param sets global array of recipes for display
          */
         $scope.getRecipes = () => {
+            console.log('getrecipes')
             Recipes.getAll()
                 .then((recipes) => {
                     $scope.data.recipes = recipes;
+
                 })
                 .catch((err) => { console.error(err); });
         };
@@ -41,7 +43,7 @@ angular.module('myApp.recipes', [])
          */
         $scope.addOne = () => {
             $scope.data.recipes.unshift($scope.recipe);
-            Recipes.addRecipe($scope.recipe);
+            Recipes.addRecipe($scope.recipe).then(data => $location.path('/recipes'));
         };
 
         /**
@@ -56,6 +58,7 @@ angular.module('myApp.recipes', [])
             Recipes.searchRecipe($scope.query)
                 .then((results) => {
                     $scope.searchresults = results.data.recipes;
+                    console.log(results.data.recipes[0]);
                 })
                 .catch((err) => { console.error(err); });
         };
@@ -74,13 +77,14 @@ angular.module('myApp.recipes', [])
                     $scope.ingredientlist.ingredients =
                         $scope.ingredientlist.ingredients.concat(result.data.recipe.ingredients);
                     //add recipe to the stored recipes database.
+                    let recipe = result.data.recipe
                     const recipeObj = {
-                        title: result.data.recipe.title,
-                        ingredients: result.data.recipe.ingredients,
-                        user: result.data.recipe.publisher,
+                        title: recipe.title,
+                        ingredients: recipe.ingredients,
+                        user: recipe.publisher,
                     };
                     Recipes.addRecipe(recipeObj);
-                })
+                }).then(() => $location.path('/recipes'))
                 .catch((err) => { console.error(err, 'error retrieving by ID'); });
         };
 

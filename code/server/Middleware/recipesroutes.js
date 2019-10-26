@@ -1,4 +1,4 @@
-const Recipe = require('../collections/recipe.js');
+const Recipe = require('../collections/recipe');
 const Q = require('q');
 let findRecipe = Q.nbind(Recipe.find, Recipe);
 const rp = require('request-promise');
@@ -29,7 +29,9 @@ module.exports = {
             .then((recipes) => {
                 res.send(recipes);
             })
-            .catch((err) => { res.send(err); });
+            .catch((err) => {
+                res.send(err);
+            });
     },
     searchRecipe(req, res, next) {
         if (req.query.rId) { next(); }
@@ -53,7 +55,9 @@ module.exports = {
                     key: process.env.KEY,
                 }
             })
-            .then(search => { res.send(search); })
+            .then(search => {
+                res.send(search);
+            })
             .catch(error => { res.send(error); });
     }
 }

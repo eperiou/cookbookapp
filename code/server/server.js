@@ -30,8 +30,8 @@ router.get('/search', recipeMiddleware.searchRecipe, recipeMiddleware.searchFood
 
 app.use(router);
 //  mongo db for sandbox environment
-mongoPromise().then((database) => {
-    db = database;
-    app.listen(process.env.PORT,
-        () => console.log('server connected on ' + process.env.PORT));
-}).catch(console.log);
+
+mongoose.connect(process.env.MONGOURI, { useNewUrlParser: true })
+    .then(() => app.listen(process.env.PORT,
+        () => console.log('server connected on2 ' + process.env.PORT)))
+    .catch(console.log)

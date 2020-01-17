@@ -33,6 +33,6 @@ bower_components/
 .floobit
 .floo
 .flooignore
-
-server/config/keys.js
-.env
+./users/lib/*
+/node_modules/*
+/src/bower_components/*

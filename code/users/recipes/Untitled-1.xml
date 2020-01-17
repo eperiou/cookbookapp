@@ -1,0 +1,19 @@
+<appSettings>    
+    <!--3rd party auth-->
+    <add key="GoogClientID" value="35554265609-kf776sd158vti94torm0s1sd726vlk7r.apps.googleusercontent.com" />
+    <add key="GoogClientSecret" value="mBHKdJg_kxfL1H9B6b8yl9kX" />
+    <!-- The Salesforce connected app is named: SELF_contractor_Portal482
+   <add key="Salesforce:ConsumerKey" value="3MVG9er.T8KbeePRu_jabVTeD96MjQQuMSEu47NnYR0i4j87oLnS4m.haBfe0sN1Gj5HoYvwv5kQH2b8wxfxJ" />
+    <add key="Salesforce:ConsumerSecret" value="f3886c0e29dd4b4689ba3b0a41a8954d" />
+    <add key="Salesforce:UserName" value="duannea@solarenergyloanfund.org.eric" />
+    <add key="Salesforce:Password" value="Kilowat1" />
+    <add key="Salesforce:SecurityToken" value="aFolc29vZLIFucfa8xXFOKAf" />
+    <add key="Salesforce:Domain" value="https://test.salesforce.com" />--> 
+    <!-- The Salesforce connected app is named: SELF_contractor_Portal  --> 
+    <add key="Salesforce:ConsumerKey" value="3MVG9KsVczVNcM8z3Q0Y0H0xt8teMtBjVS6hJ.GPbprm8DV55FX8LiqcILCnFqNn1T2LjLvKnSZfIp3.U4daw" />
+    <add key="Salesforce:ConsumerSecret" value="538cd2457984434d89be4acc03ddd888" />
+    <add key="Salesforce:UserName" value="duannea@solarenergyloanfund.org" />
+    <add key="Salesforce:Password" value="Kilowat1" />
+    <add key="Salesforce:SecurityToken" value="DWLYrSHUPSXXhWz54sn8BrfY" />
+    <add key="Salesforce:Domain" value="https://login.salesforce.com" />
+</appSettings>

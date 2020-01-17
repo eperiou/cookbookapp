@@ -69,7 +69,7 @@ app.config(['$routeProvider', 'angularAuth0Provider', '$locationProvider',
             clientID: 'aPLDVs7W8qfgAPSpDDCKFUAPYbFnMmzR',
             domain: 'ezpz-lemonsqueezy.auth0.com',
             responseType: 'token id_token',
-            redirectUri: `https://easy-recipe-book.herokuapp.com//#/callback`,
+            redirectUri: `https://easy-recipe-book.herokuapp.com/#/callback`,
             scope: 'openid'
         });
         $locationProvider.hashPrefix('');

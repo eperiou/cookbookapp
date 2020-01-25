@@ -37,3 +37,6 @@ bower_components/
 /src/bower_components/*
 .env
 /code/.env
+/.history/*
+
+

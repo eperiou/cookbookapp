@@ -1,3 +1,4 @@
+.env
 ### node etc ###
 
 # Logs
@@ -35,5 +36,4 @@ bower_components/
 ./users/lib/*
 /node_modules/*
 /src/bower_components/*
-.env
-/code/.env
+/.env

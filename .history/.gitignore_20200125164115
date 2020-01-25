@@ -36,4 +36,3 @@ bower_components/
 /node_modules/*
 /src/bower_components/*
 .env
-/code/.env

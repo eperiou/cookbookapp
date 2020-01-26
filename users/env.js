@@ -4,7 +4,7 @@
     // API url
     // For demo purposes we fetch from local file in this plunk
     // In your application this can be a url like https://api.github.com
-    window.__env.apiUrl = 'https://easy-recipe-book.herokuapp.com/';
+    window.__env.apiUrl = 'http://localhost:3000';
     window.__env.hostURL = 'http://localhost:8080';
 
     // Whether or not to enable debug mode

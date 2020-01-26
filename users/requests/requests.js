@@ -25,7 +25,7 @@ angular.module('myApp.requests', [])
                 },
             }).then(resp => resp)
             .catch(err => console.error(err));
-
+        
 
         const addRecipe = recipe =>
             $http({

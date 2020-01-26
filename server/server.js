@@ -18,7 +18,7 @@ const mongoPromise = Q.bind(mongoose.connect, process.env.MONGOURI, { useNewUrlP
 
 
 // load static assets
-app.use(express.static(path.join(__dirname + '/../dist')));
+app.use(express.static(path.join(__dirname + process.env.REPO)));
 
 router.post('/postrecipes', recipeMiddleware.postRecipe);
 
@@ -33,5 +33,5 @@ app.use(router);
 
 mongoose.connect(process.env.MONGOURI, { useNewUrlParser: true })
     .then(() => app.listen(process.env.PORT,
-        () => console.log('server connected on2 ' + process.env.PORT)))
+        () => console.log('server connected on ' + process.env.PORT)))
     .catch(console.log)
